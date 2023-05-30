@@ -1,0 +1,89 @@
+{
+  "name": "hpt-validator-tool",
+  "version": "0.1.0",
+  "author": "CMS Open Source <opensource@cms.hhs.gov>",
+  "license": "CC0-1.0",
+  "description": "Validator tool for CMS Hospital Price Transparency machine-readable files",
+  "scripts": {
+    "format": "prettier --write **/*.{js,jsx,css} !dist",
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "deploy": "echo 'NOT IMPLEMENTED'",
+    "lint": "eslint \"./src/**/*.{js,jsx,ts}\"",
+    "style": "prettier --check \"./src/**/*.{js,jsx,css}\""
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.2",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/preset-env": "^7.20.2",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "esm": "^3.2.25",
+    "prettier": "^2.8.8",
+    "prettier-eslint": "^15.0.1",
+    "vite": "^4.3.3"
+  },
+  "dependencies": {
+    "@babel/preset-react": "^7.22.0",
+    "@trussworks/react-uswds": "^4.2.1",
+    "buffer": "^6.0.3",
+    "classnames": "^2.3.2",
+    "clipboard": "^2.0.11",
+    "hpt-validator": "file:../hpt-validator",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "uswds": "^2.14.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
+    "env": {
+      "browser": true,
+      "commonjs": true,
+      "es6": true,
+      "node": true
+    },
+    "plugins": [
+      "import",
+      "prettier",
+      "react"
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module",
+      "requireConfigFile": false,
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "babelOptions": {
+        "presets": [
+          "@babel/preset-env",
+          "@babel/preset-react"
+        ]
+      }
+    }
+  },
+  "prettier": {
+    "endOfLine": "lf",
+    "semi": false,
+    "singleQuote": false,
+    "tabWidth": 2,
+    "trailingComma": "es5"
+  }
+}

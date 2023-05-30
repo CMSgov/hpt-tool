@@ -1,0 +1,41 @@
+html,
+body,
+#root {
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+#main-content {
+  flex: 1 0 auto;
+}
+
+#filename-wizard-output {
+  user-select: all;
+  -moz-user-select: all;
+  max-width: 100%;
+  overflow-x: scroll;
+}
+
+/* USDWS Discrepency Fixes */
+
+.usa-footer {
+  overflow: inherit;
+}
+
+.usa-header--basic .usa-navbar {
+  width: 100%;
+}
+
+.usa-footer--slim .usa-footer__logo-img {
+  width: 10rem;
+  max-width: 10rem;
+}
+
+.usa-file-input {
+  max-width: unset;
+  width: 100%;
+}
