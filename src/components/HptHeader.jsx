@@ -15,10 +15,18 @@ const HptHeader = () => {
   }
 
   const navItems = [
-    <a key="primaryNav_1" className="usa-nav__link" href="/">
+    <a
+      key="primaryNav_1"
+      className="usa-nav__link"
+      href={import.meta.env.BASE_URL}
+    >
       Machine Readable
     </a>,
-    <a key="primaryNav_2" className="usa-nav__link" href="filename-wizard/">
+    <a
+      key="primaryNav_2"
+      className="usa-nav__link"
+      href={`${import.meta.env.BASE_URL}filename-wizard/`}
+    >
       Filename wizard
     </a>,
   ]
@@ -33,7 +41,9 @@ const HptHeader = () => {
         <div className="usa-nav-container">
           <div className="usa-navbar">
             <Title>
-              <a href="/">Hospital Price Transparency Tools</a>
+              <a href={import.meta.env.BASE_URL}>
+                Hospital Price Transparency Tools
+              </a>
             </Title>
 
             <NavMenuButton

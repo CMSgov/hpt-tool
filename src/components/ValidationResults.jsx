@@ -32,7 +32,7 @@ const ValidationResults = ({
             <span>
               Must match format:
               &lt;ein&gt;_&lt;hospitalname&gt;_standardcharges.[json|csv].{" "}
-              <a href="filename-wizard/">
+              <a href={`${import.meta.env.BASE_URL}filename-wizard`}>
                 Click here to use the file name wizard.
               </a>
             </span>

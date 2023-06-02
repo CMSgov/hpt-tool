@@ -84,7 +84,9 @@ const Validator = () => {
                 Having trouble formatting your file name?
               </p>
               <p className="text-italic text-bold">
-                <a href="filename-wizard/">Leverage the file name wizard!</a>
+                <a href={`${import.meta.env.BASE_URL}filename-wizard/`}>
+                  Leverage the file name wizard!
+                </a>
               </p>
             </Grid>
             <Grid
@@ -97,7 +99,10 @@ const Validator = () => {
                 <p>
                   This validation tool helps identify basic issues in Hospital
                   Price Transparency machine readable files: it checks whether
-                  the file matches the <a href="#">voluntary sample format</a>{" "}
+                  the file matches the{" "}
+                  <a href="https://www.cms.gov/hospital-price-transparency/resources">
+                    voluntary sample format
+                  </a>{" "}
                   published by CMS and will identify basic issues and errors for
                   invalid data.
                 </p>
@@ -113,8 +118,11 @@ const Validator = () => {
                   This tool runs in the web browser, and uploading files here
                   does not share these files with CMS. This validator tool is
                   intended to be used with machine readable files that use the{" "}
-                  <a href="#">voluntary sample format</a> published by CMS and
-                  will not work for files that do not use this formatting.
+                  <a href="https://www.cms.gov/hospital-price-transparency/resources">
+                    voluntary sample format
+                  </a>{" "}
+                  published by CMS and will not work for files that do not use
+                  this formatting.
                 </p>
                 <br></br>
                 <hr></hr>
