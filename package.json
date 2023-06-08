@@ -34,14 +34,14 @@
   "dependencies": {
     "@babel/preset-react": "^7.22.0",
     "@trussworks/react-uswds": "^4.2.1",
+    "@uswds/uswds": "3.1.0",
     "buffer": "^6.0.3",
     "classnames": "^2.3.2",
     "clipboard": "^2.0.11",
-    "hpt-validator": "github:CMSgov/hpt-validator",
+    "hpt-validator": "^0.1.0-alpha.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "uswds": "^2.14.0"
+    "react-dom": "^18.2.0"
   },
   "eslintConfig": {
     "extends": [
