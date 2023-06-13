@@ -64,3 +64,17 @@ body,
   max-width: unset;
   width: 100%;
 }
+
+.generator-results-row {
+  align-items: center;
+  justify-content: space-between;
+}
+
+#generator-output {
+  user-select: all;
+  -moz-user-select: all;
+  background-color: #eee;
+  padding: 8px 12px;
+  max-width: 100%;
+  overflow-x: scroll;
+}
