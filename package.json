@@ -12,7 +12,9 @@
     "serve": "vite preview",
     "deploy": "echo 'NOT IMPLEMENTED'",
     "lint": "eslint \"./src/**/*.{js,jsx,ts}\"",
-    "style": "prettier --check \"./src/**/*.{js,jsx,css}\""
+    "lint:fix": "eslint --quiet --fix \"./src/**/*.{js,jsx,ts}\"",
+    "prettier": "prettier --check \"./src/**/*.{js,jsx,css}\"",
+    "prettier:fix": "prettier --write \"**/*.{js,ts}\""
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",

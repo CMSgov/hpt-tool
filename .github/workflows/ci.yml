@@ -42,7 +42,7 @@ jobs:
         run: npm run lint
 
       - name: Check code style
-        run: npm run style
+        run: npm run prettier
 
   deploy:
     runs-on: ubuntu-latest
