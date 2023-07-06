@@ -20,6 +20,33 @@ body,
   overflow-x: scroll;
 }
 
+
+/* Loading Indicator */
+
+.loading-skeleton:after {
+  content: "File processing...";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+  width: 100%;
+  height: 300px;
+  margin-top: 10px;
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+  position: relative;
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+
 /* USDWS Discrepency Fixes */
 
 .usa-footer {
