@@ -20,6 +20,7 @@ const Validator = () => {
     fileUrl: "",
     pageUrl: "",
     loading: false,
+    didMount: false,
     errors: [],
     warnings: [],
   })
@@ -42,6 +43,7 @@ const Validator = () => {
         errors: errors.filter(({ warning }) => !warning),
         warnings: errors.filter(({ warning }) => warning),
         loading: false,
+        didMount: true,
       })
     }
   }
@@ -141,19 +143,16 @@ const Validator = () => {
         </section>
       </div>
       <section className="grid-container usa-section">
-        {state.loading && (
-          <p className="font-sans-xl text-bold">Your file is processing...</p>
-        )}
-        {state.filename && !state.loading && (
-          <ValidationResults
-            filename={state.filename}
-            filenameValid={state.filenameValid}
-            valid={state.valid}
-            errors={state.errors}
-            warnings={state.warnings}
-            locationHeader={locationHeader}
-          />
-        )}
+        <ValidationResults
+          filename={state.filename}
+          filenameValid={state.filenameValid}
+          valid={state.valid}
+          errors={state.errors}
+          warnings={state.warnings}
+          locationHeader={locationHeader}
+          loading={state.loading}
+          didMount={state.didMount}
+        />
       </section>
     </Layout>
   )
