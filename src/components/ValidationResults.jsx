@@ -30,8 +30,9 @@ const ValidationResults = ({
         <h2 id="validation-results-header" tabIndex="-1" ref={resultsHeaderRef}>
           Validation results
         </h2>
+        <div id="validation-results-body">
         {loading && (
-          <p className="font-sans-xl text-bold">Your file is processing...</p>
+            <p className="font-sans-l loading-skeleton">Your file is processing. Some larger files may take a minute or two. Results will appear here once completed. If you are experiencing issues, please let us know at : <a href="mailto:PriceTransparencyHospitalCharges@cms.hhs.gov">PriceTransparencyHospitalCharges@cms.hhs.gov</a>.</p>
         )}
         {!loading && filename && (
           <>
@@ -155,6 +156,7 @@ const ValidationResults = ({
             )}
           </>
         )}
+        </div>
       </div>
     </Grid>
   )
