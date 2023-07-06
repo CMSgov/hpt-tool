@@ -20,7 +20,6 @@ body,
   overflow-x: scroll;
 }
 
-
 /* Loading Indicator */
 
 .loading-skeleton:after {
@@ -45,7 +44,6 @@ body,
     background-position-x: -200%;
   }
 }
-
 
 /* USDWS Discrepency Fixes */
 

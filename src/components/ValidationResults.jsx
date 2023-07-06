@@ -32,7 +32,15 @@ const ValidationResults = ({
         </h2>
         <div id="validation-results-body">
           {loading && (
-              <p className="font-sans-l loading-skeleton">Your file is processing. Some larger files may take a minute or two. Results will appear here once completed. If you are experiencing issues, please let us know at : <a href="mailto:PriceTransparencyHospitalCharges@cms.hhs.gov">PriceTransparencyHospitalCharges@cms.hhs.gov</a>.</p>
+            <p className="font-sans-l loading-skeleton">
+              Your file is processing. Some larger files may take a minute or
+              two. Results will appear here once completed. If you are
+              experiencing issues, please let us know at :{" "}
+              <a href="mailto:PriceTransparencyHospitalCharges@cms.hhs.gov">
+                PriceTransparencyHospitalCharges@cms.hhs.gov
+              </a>
+              .
+            </p>
           )}
           {!loading && filename && (
             <>
@@ -116,8 +124,8 @@ const ValidationResults = ({
               <Alert type={warnings.length === 0 ? `success` : `warning`}>
                 {warnings.length === 0 ? (
                   <>
-                    <span className="text-bold">No warnings found in file</span>:{" "}
-                    <span className="text-underline">{filename}</span>
+                    <span className="text-bold">No warnings found in file</span>
+                    : <span className="text-underline">{filename}</span>
                   </>
                 ) : (
                   <>

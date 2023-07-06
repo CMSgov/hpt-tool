@@ -14,7 +14,7 @@
     "lint": "eslint \"./src/**/*.{js,jsx,ts}\"",
     "lint:fix": "eslint --quiet --fix \"./src/**/*.{js,jsx,ts}\"",
     "prettier": "prettier --check \"./src/**/*.{js,jsx,css}\"",
-    "prettier:fix": "prettier --write \"**/*.{js,ts}\""
+    "prettier:fix": "prettier --write \"./src/**/*.{js,jsx,css}\""
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
