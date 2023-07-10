@@ -27,7 +27,7 @@ const HptHeader = () => {
       className="usa-nav__link"
       href={`${import.meta.env.BASE_URL}filename-wizard/`}
     >
-      Filename wizard
+      File name wizard
     </a>,
   ]
 

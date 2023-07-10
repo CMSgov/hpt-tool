@@ -44,7 +44,7 @@ const ValidationResults = ({
           )}
           {!loading && filename && (
             <>
-              <h3>Filename</h3>
+              <h3>File name</h3>
               <Alert
                 type={filenameValid ? `success` : `error`}
                 aria-live="polite"
@@ -52,12 +52,12 @@ const ValidationResults = ({
               >
                 {filenameValid ? (
                   <>
-                    <span className="text-bold">Filename valid</span>:{" "}
+                    <span className="text-bold">File name valid</span>:{" "}
                     <span className="text-underline">{filename}</span>
                   </>
                 ) : (
                   <>
-                    <span className="text-bold">Filename invalid</span>:{" "}
+                    <span className="text-bold">File name invalid</span>:{" "}
                     <span className="text-underline">{filename}</span>
                     <br />
                     <span>

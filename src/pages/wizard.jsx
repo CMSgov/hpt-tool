@@ -2,6 +2,7 @@ import React from "react"
 import Clipboard from "clipboard"
 import { useEffect, useState } from "react"
 import {
+  Alert,
   Grid,
   Form,
   Radio,
@@ -11,6 +12,7 @@ import {
   TextInput,
   FormGroup,
 } from "@trussworks/react-uswds"
+import { validateFilename } from "hpt-validator"
 import Layout from "../layouts"
 
 const Wizard = () => {
@@ -24,6 +26,30 @@ const Wizard = () => {
   useEffect(() => {
     new Clipboard("[data-clipboard-target]")
   }, [])
+
+  const getFilename = () =>
+    `${state.ein || "<ein>"}_${
+      state.name.replace(/\s/g, "-") || "<hospitalname>"
+    }${state.npi ? `_${state.npi}` : ""}_standardcharges.${
+      state.fileType || "<format>"
+    }`
+
+  const getAlertParams = () => {
+    if (!(state.name.trim() && state.ein.trim() && state.fileType)) {
+      return {
+        type: "info",
+        message: "Enter required parameters to validate file name",
+      }
+    }
+    const isValid = validateFilename(getFilename())
+    if (isValid) {
+      return { type: "success", message: "File name is valid" }
+    } else {
+      return { type: "error", message: `File name is invalid` }
+    }
+  }
+
+  const { type: alertType, message: alertMessage } = getAlertParams()
 
   return (
     <Layout>
@@ -58,6 +84,9 @@ const Wizard = () => {
                   onChange={(e) => setState({ ...state, ein: e.target.value })}
                 ></TextInput>
                 <Label htmlFor="hospital-name">Name</Label>
+                <span className="usa-hint">
+                  Enter the hospital&apos;s legal name
+                </span>
                 <TextInput
                   id="hospital-name"
                   name="hospital-name"
@@ -66,6 +95,10 @@ const Wizard = () => {
                 ></TextInput>
                 <FormGroup>
                   <Label htmlFor="hospital-npi">NPI (optional)</Label>
+                  <span className="usa-hint">
+                    Enter the NPI for each hospital location with distinct
+                    prices
+                  </span>
                   <TextInput
                     id="hospital-npi"
                     name="hospital-npi"
@@ -108,6 +141,15 @@ const Wizard = () => {
                 {state.npi ? `_${state.npi}` : ``}_standardcharges.
                 {state.fileType || "<format>"}
               </pre>
+              <Alert
+                type={alertType}
+                slim
+                aria-live="polite"
+                aria-atomic="true"
+                className="margin-bottom-2"
+              >
+                {alertMessage}
+              </Alert>
             </Grid>
           </Grid>
         </section>
