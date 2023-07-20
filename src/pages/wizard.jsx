@@ -15,17 +15,25 @@ import {
 import { validateFilename } from "hpt-validator"
 import Layout from "../layouts"
 
+const STORAGE_PATH = "cms-hpt-file-name-wizard"
+
 const Wizard = () => {
-  const [state, setState] = useState({
-    name: "",
-    ein: "",
-    fileType: "",
-    npi: "",
-  })
+  const [state, setState] = useState(
+    JSON.parse(window.sessionStorage.getItem(STORAGE_PATH)) || {
+      name: "",
+      ein: "",
+      fileType: "",
+      npi: "",
+    }
+  )
 
   useEffect(() => {
     new Clipboard("[data-clipboard-target]")
   }, [])
+
+  useEffect(() => {
+    window.sessionStorage.setItem(STORAGE_PATH, JSON.stringify(state))
+  }, [state.name, state.ein, state.fileType, state.npi])
 
   const getFilename = () =>
     `${state.ein || "<ein>"}_${
@@ -81,6 +89,7 @@ const Wizard = () => {
                   id="hospital-ein"
                   name="hospital-ein"
                   type="text"
+                  value={state.ein}
                   onChange={(e) => setState({ ...state, ein: e.target.value })}
                 ></TextInput>
                 <Label htmlFor="hospital-name">Name</Label>
@@ -91,6 +100,7 @@ const Wizard = () => {
                   id="hospital-name"
                   name="hospital-name"
                   type="text"
+                  value={state.name}
                   onChange={(e) => setState({ ...state, name: e.target.value })}
                 ></TextInput>
                 <FormGroup>
@@ -103,6 +113,7 @@ const Wizard = () => {
                     id="hospital-npi"
                     name="hospital-npi"
                     type="text"
+                    value={state.npi}
                     onChange={(e) =>
                       setState({ ...state, npi: e.target.value })
                     }
@@ -120,12 +131,14 @@ const Wizard = () => {
                     name="input-type"
                     label="CSV"
                     value="csv"
+                    checked={state.fileType === "csv"}
                   />
                   <Radio
                     id="input-json"
                     name="input-type"
                     label="JSON"
                     value="json"
+                    checked={state.fileType === "json"}
                   />
                 </Fieldset>
               </Form>

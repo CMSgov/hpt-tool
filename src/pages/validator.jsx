@@ -6,6 +6,8 @@ import ValidationResults from "../components/ValidationResults"
 import { validateCsv, validateJson, validateFilename } from "hpt-validator"
 import Layout from "../layouts"
 
+const STORAGE_PATH = "cms-hpt-validation-results"
+
 const getFileExtension = (filename) => {
   const splitFilename = filename.toLowerCase().split(".")
   if (splitFilename.length < 1) return null
@@ -13,17 +15,19 @@ const getFileExtension = (filename) => {
 }
 
 const Validator = () => {
-  const [state, setState] = useState({
-    valid: true,
-    filename: "",
-    filenameValid: true,
-    fileUrl: "",
-    pageUrl: "",
-    loading: false,
-    didMount: false,
-    errors: [],
-    warnings: [],
-  })
+  const [state, setState] = useState(
+    JSON.parse(window.sessionStorage.getItem(STORAGE_PATH)) || {
+      valid: true,
+      filename: "",
+      filenameValid: true,
+      fileUrl: "",
+      pageUrl: "",
+      loading: false,
+      didMount: false,
+      errors: [],
+      warnings: [],
+    }
+  )
 
   const validateFile = async (evt) => {
     const file = evt.target.files[0]
@@ -37,14 +41,16 @@ const Validator = () => {
       const { valid, errors } = await (fileExt === "csv"
         ? validateCsv(file)
         : validateJson(file))
-      setState({
+      const stateObj = {
         ...initialState,
         valid,
         errors: errors.filter(({ warning }) => !warning),
         warnings: errors.filter(({ warning }) => warning),
         loading: false,
         didMount: true,
-      })
+      }
+      setState(stateObj)
+      window.sessionStorage.setItem(STORAGE_PATH, JSON.stringify(stateObj))
     }
   }
 
