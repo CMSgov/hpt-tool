@@ -23,6 +23,7 @@ const Wizard = () => {
       name: "",
       ein: "",
       fileType: "",
+      showNpi: null,
       npi: "",
     }
   )
@@ -103,22 +104,47 @@ const Wizard = () => {
                   value={state.name}
                   onChange={(e) => setState({ ...state, name: e.target.value })}
                 ></TextInput>
-                <FormGroup>
-                  <Label htmlFor="hospital-npi">NPI (optional)</Label>
-                  <span className="usa-hint">
-                    Enter the NPI for each hospital location with distinct
-                    prices
-                  </span>
-                  <TextInput
-                    id="hospital-npi"
-                    name="hospital-npi"
-                    type="text"
-                    value={state.npi}
-                    onChange={(e) =>
-                      setState({ ...state, npi: e.target.value })
-                    }
+                <Fieldset
+                  legend="Does your hospital have more than one location with distinct negotiated rates?"
+                  className="usa-form-group"
+                  onChange={(e) => {
+                    setState({ ...state, showNpi: e.target.value === "yes" })
+                  }}
+                >
+                  <Radio
+                    id="npi-yes"
+                    name="show-npi"
+                    label="Yes"
+                    value="yes"
+                    defaultChecked={state.showNpi}
                   />
-                </FormGroup>
+                  <Radio
+                    id="npi-no"
+                    name="show-npi"
+                    label="No"
+                    value="no"
+                    defaultChecked={state.showNpi === false}
+                  />
+                </Fieldset>
+                <div role="region" aria-live="polite">
+                  {state.showNpi && (
+                    <FormGroup>
+                      <Label htmlFor="hospital-npi">NPI (optional)</Label>
+                      <span className="usa-hint">
+                        Enter the NPI for a hospital location
+                      </span>
+                      <TextInput
+                        id="hospital-npi"
+                        name="hospital-npi"
+                        type="text"
+                        value={state.npi}
+                        onChange={(e) =>
+                          setState({ ...state, npi: e.target.value })
+                        }
+                      />
+                    </FormGroup>
+                  )}
+                </div>
                 <Fieldset
                   legend="File type"
                   className="usa-form-group"
@@ -131,14 +157,14 @@ const Wizard = () => {
                     name="input-type"
                     label="CSV"
                     value="csv"
-                    checked={state.fileType === "csv"}
+                    defaultChecked={state.fileType === "csv"}
                   />
                   <Radio
                     id="input-json"
                     name="input-type"
                     label="JSON"
                     value="json"
-                    checked={state.fileType === "json"}
+                    defaultChecked={state.fileType === "json"}
                   />
                 </Fieldset>
               </Form>
@@ -151,7 +177,8 @@ const Wizard = () => {
               >
                 {state.ein || "<ein>"}_
                 {state.name.replace(/\s/g, "-") || "<hospitalname>"}
-                {state.npi ? `_${state.npi}` : ``}_standardcharges.
+                {state.showNpi && state.npi ? `_${state.npi}` : ``}
+                _standardcharges.
                 {state.fileType || "<format>"}
               </pre>
               <Alert
