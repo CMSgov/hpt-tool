@@ -2,6 +2,22 @@ import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import { Grid, Alert, Table } from "@trussworks/react-uswds"
 
+const createCsvString = (errors, warnings) =>
+  "location,message,type\n" +
+  errors
+    .map(
+      ({ path, message }) => `"${path}","${message.replace(/"/gi, "")}","error"`
+    )
+
+    .join("\n") +
+  "\n" +
+  warnings
+    .map(
+      ({ path, message }) =>
+        `"${path}","${message.replace(/"/gi, "")}","warning"`
+    )
+    .join("\n")
+
 const ValidationResults = ({
   filename,
   filenameValid,
@@ -13,6 +29,11 @@ const ValidationResults = ({
   didMount,
 }) => {
   const resultsHeaderRef = useRef(null)
+
+  const blob = new Blob([createCsvString(errors, warnings)], {
+    type: "text/csv;charset=utf-8",
+  })
+  const downloadUrl = window.URL.createObjectURL(blob)
 
   useEffect(() => {
     if (didMount && !loading && resultsHeaderRef.current) {
@@ -30,6 +51,7 @@ const ValidationResults = ({
         <h2 id="validation-results-header" tabIndex="-1" ref={resultsHeaderRef}>
           Validation results
         </h2>
+
         <div id="validation-results-body">
           {loading && (
             <p className="font-sans-l loading-skeleton">
@@ -44,6 +66,13 @@ const ValidationResults = ({
           )}
           {!loading && filename && (
             <>
+              <a
+                className="usa-button"
+                href={downloadUrl}
+                download="cms-hpt-validator-results.csv"
+              >
+                Download results as spreadsheet
+              </a>
               <h3>File name</h3>
               <Alert
                 type={filenameValid ? `success` : `error`}
