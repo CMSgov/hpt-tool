@@ -51,13 +51,7 @@ const ValidationResults = ({
         <h2 id="validation-results-header" tabIndex="-1" ref={resultsHeaderRef}>
           Validation results
         </h2>
-        <a
-          className="usa-button"
-          href={downloadUrl}
-          download="cms-hpt-validator-results.csv"
-        >
-          Download results as spreadsheet
-        </a>
+
         <div id="validation-results-body">
           {loading && (
             <p className="font-sans-l loading-skeleton">
@@ -72,6 +66,13 @@ const ValidationResults = ({
           )}
           {!loading && filename && (
             <>
+              <a
+                className="usa-button"
+                href={downloadUrl}
+                download="cms-hpt-validator-results.csv"
+              >
+                Download results as spreadsheet
+              </a>
               <h3>File name</h3>
               <Alert
                 type={filenameValid ? `success` : `error`}
