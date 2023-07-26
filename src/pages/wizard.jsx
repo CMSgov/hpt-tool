@@ -93,10 +93,10 @@ const Wizard = () => {
                   value={state.ein}
                   onChange={(e) => setState({ ...state, ein: e.target.value })}
                 ></TextInput>
-                <Label htmlFor="hospital-name">Name</Label>
-                <span className="usa-hint">
+                <Label htmlFor="hospital-name">Hospital name</Label>
+                {/* <span className="usa-hint">
                   Enter the hospital&apos;s legal name
-                </span>
+                </span> */}
                 <TextInput
                   id="hospital-name"
                   name="hospital-name"
