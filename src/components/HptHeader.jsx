@@ -20,7 +20,7 @@ const HptHeader = () => {
       className="usa-nav__link"
       href={import.meta.env.BASE_URL}
     >
-      Machine Readable
+      Machine readable file
     </a>,
     <a
       key="primaryNav_2"
