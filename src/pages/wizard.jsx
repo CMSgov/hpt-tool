@@ -37,9 +37,9 @@ const Wizard = () => {
   }, [state.name, state.ein, state.fileType, state.npi])
 
   const getFilename = () =>
-    `${state.ein || "<ein>"}_${
-      state.name.replace(/\s/g, "-") || "<hospitalname>"
-    }${state.npi ? `_${state.npi}` : ""}_standardcharges.${
+    `${state.ein || "<ein>"}${
+      state.showNpi && state.npi ? `-${state.npi}` : ``
+    }_${state.name.replace(/\s/g, "-") || "<hospitalname>"}_standardcharges.${
       state.fileType || "<format>"
     }`
 
@@ -175,11 +175,7 @@ const Wizard = () => {
                 id="filename-wizard-output"
                 className="display-block bg-base-lighter padding-x-1 padding-y-105"
               >
-                {state.ein || "<ein>"}_
-                {state.name.replace(/\s/g, "-") || "<hospitalname>"}
-                {state.showNpi && state.npi ? `_${state.npi}` : ``}
-                _standardcharges.
-                {state.fileType || "<format>"}
+                {getFilename()}
               </pre>
               <Alert
                 type={alertType}
