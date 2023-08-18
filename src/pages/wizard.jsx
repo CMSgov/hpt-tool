@@ -17,6 +17,9 @@ import Layout from "../layouts"
 
 const STORAGE_PATH = "cms-hpt-file-name-wizard"
 
+const EIN_REGEX = /^\d{2}-?\d{7}$/
+const NPI_REGEX = /^\d{10}$/
+
 const Wizard = () => {
   const [state, setState] = useState(
     JSON.parse(window.sessionStorage.getItem(STORAGE_PATH)) || {
@@ -54,7 +57,21 @@ const Wizard = () => {
     if (isValid) {
       return { type: "success", message: "File name is valid" }
     } else {
-      return { type: "error", message: `File name is invalid` }
+      if (!state.ein.match(EIN_REGEX)) {
+        return {
+          type: "error",
+          message: `EIN must be 9 digits in the format XX-XXXXXXX or XXXXXXXXX`,
+        }
+      } else if (state.showNpi && state.npi && !state.npi.match(NPI_REGEX)) {
+        return {
+          type: "error",
+          message: `NPI must be 10 digits with no dashes`,
+        }
+      } else {
+        // Should never happen - given valid input, we should always produce
+        // a valid filename
+        return { type: "error", message: `File name is invalid` }
+      }
     }
   }
 
