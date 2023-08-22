@@ -26,11 +26,12 @@ const ValidationResults = ({
   warnings,
   locationHeader,
   loading,
+  readError,
   didMount,
 }) => {
   const resultsHeaderRef = useRef(null)
 
-  const blob = new Blob([createCsvString(errors, warnings)], {
+  const blob = new Blob([createCsvString(errors || [], warnings || [])], {
     type: "text/csv;charset=utf-8",
   })
   const downloadUrl = window.URL.createObjectURL(blob)
@@ -64,7 +65,15 @@ const ValidationResults = ({
               .
             </p>
           )}
-          {!loading && filename && (
+          {readError && (
+            <Alert type={`error`} aria-live="polite" aria-atomic="true">
+              <span>
+                There was an error reading your file. Please check your file to
+                make sure it is readable and then try again.
+              </span>
+            </Alert>
+          )}
+          {!loading && !readError && filename && (
             <>
               <a
                 className="usa-button"
@@ -207,6 +216,7 @@ ValidationResults.propTypes = {
   warnings: PropTypes.arrayOf(PropTypes.object),
   locationHeader: PropTypes.string,
   loading: PropTypes.bool,
+  readError: PropTypes.bool,
   didMount: PropTypes.bool,
 }
 

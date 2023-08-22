@@ -24,6 +24,7 @@ const Validator = () => {
       pageUrl: "",
       loading: false,
       didMount: false,
+      readError: false,
       errors: [],
       warnings: [],
     }
@@ -35,22 +36,32 @@ const Validator = () => {
       filename: file.name,
       filenameValid: validateFilename(file.name),
     }
-    setState({ ...state, ...initialState, loading: true })
+    setState({ ...state, ...initialState, readError: false, loading: true })
     const fileExt = getFileExtension(file.name)
     if (["csv", "json"].includes(fileExt)) {
-      const { valid, errors } = await (fileExt === "csv"
-        ? validateCsv(file)
-        : validateJson(file))
-      const stateObj = {
-        ...initialState,
-        valid,
-        errors: errors.filter(({ warning }) => !warning),
-        warnings: errors.filter(({ warning }) => warning),
-        loading: false,
-        didMount: true,
+      try {
+        const { valid, errors } = await (fileExt === "csv"
+          ? validateCsv(file)
+          : validateJson(file))
+        const stateObj = {
+          ...initialState,
+          valid,
+          errors: errors.filter(({ warning }) => !warning),
+          warnings: errors.filter(({ warning }) => warning),
+          loading: false,
+          didMount: true,
+        }
+        setState(stateObj)
+        window.sessionStorage.setItem(STORAGE_PATH, JSON.stringify(stateObj))
+      } catch (error) {
+        console.error(error)
+        setState({
+          ...initialState,
+          loading: false,
+          didMount: true,
+          readError: true,
+        })
       }
-      setState(stateObj)
-      window.sessionStorage.setItem(STORAGE_PATH, JSON.stringify(stateObj))
     }
   }
 
@@ -156,6 +167,7 @@ const Validator = () => {
           errors={state.errors}
           warnings={state.warnings}
           locationHeader={locationHeader}
+          readError={state.readError}
           loading={state.loading}
           didMount={state.didMount}
         />
