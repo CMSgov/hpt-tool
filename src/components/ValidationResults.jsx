@@ -68,8 +68,9 @@ const ValidationResults = ({
           {readError && (
             <Alert type={`error`} aria-live="polite" aria-atomic="true">
               <span>
-                There was an error reading your file. Please check your file to
-                make sure it is readable and then try again.
+                There&apos;s something preventing your file from being machine
+                readable. Please check your file to make sure it is readable and
+                then try again.
               </span>
             </Alert>
           )}
