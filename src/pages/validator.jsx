@@ -1,12 +1,21 @@
 import React from "react"
 import { useState } from "react"
-import { Label, Grid, FormGroup } from "@trussworks/react-uswds"
+import {
+  Label,
+  Grid,
+  FormGroup,
+  // Fieldset,
+  // Radio,
+} from "@trussworks/react-uswds"
 import { FileInput } from "../components/FileInput"
 import ValidationResults from "../components/ValidationResults"
 import { validateCsv, validateJson, validateFilename } from "hpt-validator"
 import Layout from "../layouts"
 
+const MAX_ERRORS = 250
 const STORAGE_PATH = "cms-hpt-validation-results"
+
+// const SCHEMA_VERSIONS = ["v1.1", "v2.0"]
 
 const getFileExtension = (filename) => {
   const splitFilename = filename.toLowerCase().split(".")
@@ -19,6 +28,7 @@ const Validator = () => {
     JSON.parse(window.sessionStorage.getItem(STORAGE_PATH)) || {
       valid: true,
       filename: "",
+      schemaVersion: "v1.1",
       filenameValid: true,
       fileUrl: "",
       pageUrl: "",
@@ -41,8 +51,8 @@ const Validator = () => {
     if (["csv", "json"].includes(fileExt)) {
       try {
         const { valid, errors } = await (fileExt === "csv"
-          ? validateCsv(file)
-          : validateJson(file))
+          ? validateCsv(file, state.schemaVersion, { maxErrors: MAX_ERRORS })
+          : validateJson(file, state.schemaVersion, { maxErrors: MAX_ERRORS }))
         const stateObj = {
           ...initialState,
           valid,
@@ -93,6 +103,25 @@ const Validator = () => {
                     onChange={validateFile}
                   />
                 </FormGroup>
+                {/* TODO: Add this back in when multiple versions are allowed in the schema */}
+                {/* <Fieldset
+                  legend={<span className="text-bold">Schema version</span>}
+                  className="usa-form-group margin-top-0"
+                  onChange={(e) => {
+                    setState({ ...state, schemaVersion: e.target.value })
+                  }}
+                >
+                  {SCHEMA_VERSIONS.map((version) => (
+                    <Radio
+                      key={version}
+                      id={`schema-version-${version}`}
+                      name="schema-version"
+                      label={version}
+                      value={version}
+                      defaultChecked={state.schemaVersion === version}
+                    />
+                  ))}
+                </Fieldset> */}
               </form>
               {state.loading && (
                 <p aria-live="polite" aria-atomic="true" className="text-bold">
@@ -166,6 +195,7 @@ const Validator = () => {
           valid={state.valid}
           errors={state.errors}
           warnings={state.warnings}
+          maxErrors={MAX_ERRORS}
           locationHeader={locationHeader}
           readError={state.readError}
           loading={state.loading}

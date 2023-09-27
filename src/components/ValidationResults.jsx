@@ -24,6 +24,7 @@ const ValidationResults = ({
   valid,
   errors,
   warnings,
+  maxErrors,
   locationHeader,
   loading,
   readError,
@@ -35,6 +36,8 @@ const ValidationResults = ({
     type: "text/csv;charset=utf-8",
   })
   const downloadUrl = window.URL.createObjectURL(blob)
+
+  const atMaxErrors = errors.length + warnings.length >= maxErrors
 
   useEffect(() => {
     if (didMount && !loading && resultsHeaderRef.current) {
@@ -129,6 +132,12 @@ const ValidationResults = ({
                       found in file
                     </span>
                     : <span className="text-underline">{filename}</span>
+                    <br />
+                    {atMaxErrors && (
+                      <span>
+                        Only the first {maxErrors} errors and warnings are shown
+                      </span>
+                    )}
                   </>
                 )}
               </Alert>
@@ -176,6 +185,12 @@ const ValidationResults = ({
                     </span>
                     : <span className="text-underline">{filename}</span>
                     <br />
+                    {atMaxErrors && (
+                      <span>
+                        Only the first {maxErrors} errors and warnings are shown
+                      </span>
+                    )}
+                    <br />
                     <span>
                       These items are not required changes, but addressing them
                       could save time in the future.
@@ -215,6 +230,7 @@ ValidationResults.propTypes = {
   valid: PropTypes.bool,
   errors: PropTypes.arrayOf(PropTypes.object),
   warnings: PropTypes.arrayOf(PropTypes.object),
+  maxErrors: PropTypes.number,
   locationHeader: PropTypes.string,
   loading: PropTypes.bool,
   readError: PropTypes.bool,
