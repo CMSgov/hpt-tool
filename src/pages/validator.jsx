@@ -45,6 +45,7 @@ const Validator = () => {
     const initialState = {
       filename: file.name,
       filenameValid: validateFilename(file.name),
+      schemaVersion: state.schemaVersion,
     }
     setState({ ...state, ...initialState, readError: false, loading: true })
     const fileExt = getFileExtension(file.name)
