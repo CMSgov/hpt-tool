@@ -179,8 +179,24 @@ const TxtGenerator = () => {
               className="border-top border-base-lighter padding-top-4 desktop:border-0 desktop:padding-top-0"
             >
               <div className="usa-prose">
-                <h1>What this tool helps with</h1>
-                <p>This generates the cms-hpt.txt for indexing files.</p>
+                <h1>How this tool helps</h1>
+                <p>
+                  This tool generates <code>cms-hpt.txt</code> files that can be
+                  placed at the root of a hospital&apos;s domain including
+                  information to improve discoverability of machine readable
+                  files.
+                </p>
+                <br></br>
+                <hr></hr>
+                <h2>Contact</h2>
+                <p>
+                  Have you run into an issue or have a question about this tool?
+                  Please reach out to us at{" "}
+                  <a href="mailto:PriceTransparencyHospitalCharges@cms.hhs.gov">
+                    PriceTransparencyHospitalCharges@cms.hhs.gov
+                  </a>
+                  .
+                </p>
               </div>
             </Grid>
           </Grid>
