@@ -16,10 +16,7 @@ The purpose of these requirements is to facilitate automated access to hospital 
 1. Generate a TXT file that includes the required information indicated below. 
 1. If the MRF contains standard charge information for more than one location, create an entry for each of the inpatient locations and standalone emergency hospitals in the TXT file.
 1. Name the file “cms-hpt.txt”.
-1. Place the TXT file on the root of the domain of the public website your hospital has selected to
-host its machine-readable file (MRF), without regard to page structure. As an example, a
-hospital with the website https://hospital.com would locate its file at https://hospital.com/cms-
-hpt.txt    
+1. Place the TXT file on the root of the domain of the public website your hospital has selected to host its machine-readable file (MRF), without regard to page structure. As an example, a hospital with the website https://hospital.com would locate its file at https://hospital.com/cms-hpt.txt    
 
 
 #### Required information for the TXT file:
