@@ -2,6 +2,7 @@ import React from "react"
 import Clipboard from "clipboard"
 import { useEffect, useState } from "react"
 import {
+  Alert,
   Grid,
   Button,
   Label,
@@ -13,10 +14,17 @@ import Layout from "../layouts"
 const txtFileOutput = (hospitals) =>
   hospitals
     .map(
-      ({ name, sourcePageUrl, mrfUrl, contact }) => `location-name: ${name}
+      ({
+        name,
+        sourcePageUrl,
+        mrfUrl,
+        contactName,
+        contactEmail,
+      }) => `location-name: ${name}
 source-page-url: ${sourcePageUrl}
 mrf-url: ${mrfUrl}
-contact-email: ${contact}`
+contact-name: ${contactName}
+contact-email: ${contactEmail}`
     )
     .join("\n\n")
 
@@ -26,8 +34,15 @@ const removeIndex = (array, index) => [
 ]
 
 const TxtGenerator = () => {
+  const baseHospital = {
+    name: "",
+    sourcePageUrl: "",
+    mrfUrl: "",
+    contactName: "",
+    contactEmail: "",
+  }
   const [state, setState] = useState({
-    hospitals: [{ name: "", sourcePageUrl: "", mrfUrl: "", contact: "" }],
+    hospitals: [{ ...baseHospital }],
     downloadUrl: "",
   })
 
@@ -51,6 +66,35 @@ const TxtGenerator = () => {
     setState({ ...state, hospitals })
   }
 
+  const getAlertParams = () => {
+    if (
+      state.hospitals.length === 1 &&
+      Object.values(state.hospitals[0]).every((v) => !v.trim())
+    ) {
+      return {
+        type: "info",
+        message: "Fill in hospital fields to generate file",
+      }
+    }
+    if (
+      state.hospitals.every((hospital) =>
+        Object.values(hospital).every((v) => v.trim())
+      )
+    ) {
+      return {
+        type: "success",
+        message: "Generated file is valid",
+      }
+    } else {
+      return {
+        type: "error",
+        message: "All fields must be filled in for each hospital",
+      }
+    }
+  }
+
+  const { type: alertType, message: alertMessage } = getAlertParams()
+
   return (
     <Layout>
       <div className="bg-base-lightest">
@@ -60,7 +104,7 @@ const TxtGenerator = () => {
               desktop={{ col: 6 }}
               className="bg-white display-flex flex-column flex-align-self-start margin-bottom-4"
             >
-              <h2 className="margin-bottom-0">Generator</h2>
+              <h2 className="margin-bottom-0">TXT Generator</h2>
               <form action="" method="GET">
                 {state.hospitals.map((hospital, index) => (
                   <FormGroup key={index}>
@@ -106,17 +150,32 @@ const TxtGenerator = () => {
                     />
                     <Label
                       className="margin-top-1"
-                      htmlFor={`contact-${index}`}
+                      htmlFor={`contact-name-${index}`}
+                    >
+                      Contact name
+                    </Label>
+                    <TextInput
+                      id={`contact-name-${index}`}
+                      name={`contact-name-${index}`}
+                      placeholder="Contact name"
+                      value={hospital.contactName}
+                      onChange={(e) =>
+                        updateHospital(index, { contactName: e.target.value })
+                      }
+                    />
+                    <Label
+                      className="margin-top-1"
+                      htmlFor={`contact-email-${index}`}
                     >
                       Contact email
                     </Label>
                     <TextInput
-                      id={`contact-${index}`}
-                      name={`contact-${index}`}
+                      id={`contact-email-${index}`}
+                      name={`contact-email-${index}`}
                       placeholder="Contact email"
-                      value={hospital.contact}
+                      value={hospital.contactEmail}
                       onChange={(e) =>
-                        updateHospital(index, { contact: e.target.value })
+                        updateHospital(index, { contactEmail: e.target.value })
                       }
                     />
                     {state.hospitals.length > 1 ? (
@@ -145,20 +204,20 @@ const TxtGenerator = () => {
                 onClick={() =>
                   setState({
                     ...state,
-                    hospitals: [
-                      ...state.hospitals,
-                      {
-                        name: "",
-                        sourcePageUrl: "",
-                        mrfUrl: "",
-                        contact: "",
-                      },
-                    ],
+                    hospitals: [...state.hospitals, baseHospital],
                   })
                 }
               >
                 Add
               </Button>
+              <Alert
+                type={alertType}
+                slim
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                {alertMessage}
+              </Alert>
               <hr className="width-full margin-top-3 margin-bottom-3" />
               <Grid className="generator-results-row" row>
                 <h3 className="margin-y-0">Results</h3>
