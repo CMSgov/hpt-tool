@@ -27,7 +27,7 @@ const HptHeader = () => {
       className="usa-nav__link"
       href={`${import.meta.env.BASE_URL}filename-wizard/`}
     >
-      File name wizard
+      MRF File name wizard
     </a>,
     <a
       key="primaryNav_3"
@@ -48,9 +48,7 @@ const HptHeader = () => {
         <div className="usa-nav-container">
           <div className="usa-navbar">
             <Title>
-              <a href={import.meta.env.BASE_URL}>
                 Hospital Price Transparency Tools
-              </a>
             </Title>
 
             <NavMenuButton
