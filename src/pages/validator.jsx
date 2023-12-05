@@ -146,44 +146,40 @@ const Validator = () => {
               <div className="usa-prose">
                 <h1>How this tool helps</h1>
                 <p>
-                  This validation tool helps identify basic issues in Hospital
-                  Price Transparency machine readable files: it checks whether
-                  the file matches the{" "}
+                  This validation tool checks whether the Hospital Price
+                  Transparency machine-readable file matches CMS' Version 1.1 of
+                  the{" "}
                   <a href="https://www.cms.gov/hospital-price-transparency/resources">
-                    voluntary sample format
+                    Voluntary Sample Format and Data Dictionary
                   </a>{" "}
-                  published by CMS and will identify basic issues and errors for
-                  invalid data.
+                  and will identify basic issues and errors when the uploaded
+                  file's structure and encoded data do not match Version 1.1
+                  specifications.
                 </p>
                 <p>
-                  A file that passes these basic validation checks{" "}
-                  <strong>
-                    does not mean that a file is guaranteed to be fully in
-                    compliance
-                  </strong>
-                  .
+                  Note that this validator does not test against the new
+                  required CMS template layout and data specifications that
+                  hospitals must conform to by July 1, 2024, as outlined in the
+                  CY 2024 OPPS/ASC Final Rule. Implementation guidance on the
+                  required CMS templates may be found on the{" "}
+                  <a href="https://github.com/CMSgov/hospital-price-transparency">
+                    Hospital Price Transparency Data Dictionary GitHub
+                  </a>{" "}
+                  repository.
                 </p>
                 <p>
-                  This tool runs in the web browser, and uploading files here
-                  does not share these files with CMS. This validator tool is
-                  intended to be used with machine readable files that use the{" "}
+                  This tool runs in the web browser and does not store any data.
+                  Uploading files here does not share these files with CMS. This
+                  validator tool is intended to be used with machine readable
+                  files that use the{" "}
                   <a href="https://www.cms.gov/hospital-price-transparency/resources">
-                    voluntary sample format
+                    Version 1.1 Voluntary Sample Format
                   </a>{" "}
-                  published by CMS and will not work for files that do not use
-                  this formatting.
+                  published by CMS and will not work for files that do not
+                  follow this formatting layout.
                 </p>
                 <br></br>
                 <hr></hr>
-                <h2>Contact</h2>
-                <p>
-                  Have you run into an issue or have a question about this tool?
-                  Please reach out to us at{" "}
-                  <a href="mailto:PriceTransparencyHospitalCharges@cms.hhs.gov">
-                    PriceTransparencyHospitalCharges@cms.hhs.gov
-                  </a>
-                  .
-                </p>
               </div>
             </Grid>
           </Grid>
