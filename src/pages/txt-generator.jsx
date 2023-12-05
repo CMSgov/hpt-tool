@@ -101,162 +101,85 @@ const TxtGenerator = () => {
         <section className="grid-container usa-section">
           <Grid row gap>
             <Grid
-              desktop={{ col: 6 }}
-              className="bg-white display-flex flex-column flex-align-self-start margin-bottom-4"
-            >
-              <h2 className="margin-bottom-0">TXT Generator</h2>
-              <form action="" method="GET">
-                {state.hospitals.map((hospital, index) => (
-                  <FormGroup key={index}>
-                    <Label htmlFor={`name-${index}`}>Hospital name</Label>
-                    <TextInput
-                      id={`name-${index}`}
-                      name={`name-${index}`}
-                      placeholder="Hospital name"
-                      value={hospital.name}
-                      onChange={(e) =>
-                        updateHospital(index, { name: e.target.value })
-                      }
-                    />
-                    <Label
-                      className="margin-top-1"
-                      htmlFor={`source-page-url-${index}`}
-                    >
-                      Source page URL
-                    </Label>
-                    <TextInput
-                      id={`source-page-url-${index}`}
-                      name={`source-page-url-${index}`}
-                      placeholder="Source page URL"
-                      value={hospital.sourcePageUrl}
-                      onChange={(e) =>
-                        updateHospital(index, { sourcePageUrl: e.target.value })
-                      }
-                    />
-                    <Label
-                      className="margin-top-1"
-                      htmlFor={`mrf-url-${index}`}
-                    >
-                      Machine-readable file URL
-                    </Label>
-                    <TextInput
-                      id={`mrf-url-${index}`}
-                      name={`mrf-url-${index}`}
-                      placeholder="MRF URL"
-                      value={hospital.mrfUrl}
-                      onChange={(e) =>
-                        updateHospital(index, { mrfUrl: e.target.value })
-                      }
-                    />
-                    <Label
-                      className="margin-top-1"
-                      htmlFor={`contact-name-${index}`}
-                    >
-                      Contact name
-                    </Label>
-                    <TextInput
-                      id={`contact-name-${index}`}
-                      name={`contact-name-${index}`}
-                      placeholder="Contact name"
-                      value={hospital.contactName}
-                      onChange={(e) =>
-                        updateHospital(index, { contactName: e.target.value })
-                      }
-                    />
-                    <Label
-                      className="margin-top-1"
-                      htmlFor={`contact-email-${index}`}
-                    >
-                      Contact email
-                    </Label>
-                    <TextInput
-                      id={`contact-email-${index}`}
-                      name={`contact-email-${index}`}
-                      placeholder="Contact email"
-                      value={hospital.contactEmail}
-                      onChange={(e) =>
-                        updateHospital(index, { contactEmail: e.target.value })
-                      }
-                    />
-                    {state.hospitals.length > 1 ? (
-                      <Button
-                        type="button"
-                        className="display-flex margin-top-2"
-                        variation="solid"
-                        onClick={() =>
-                          setState({
-                            ...state,
-                            hospitals: removeIndex(state.hospitals, index),
-                          })
-                        }
-                      >
-                        Delete
-                      </Button>
-                    ) : (
-                      ``
-                    )}
-                  </FormGroup>
-                ))}
-              </form>
-              <Button
-                type="button"
-                className="margin-top-2 flex-align-self-end margin-right-0"
-                onClick={() =>
-                  setState({
-                    ...state,
-                    hospitals: [...state.hospitals, baseHospital],
-                  })
-                }
-              >
-                Add
-              </Button>
-              <Alert
-                type={alertType}
-                slim
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                {alertMessage}
-              </Alert>
-              <hr className="width-full margin-top-3 margin-bottom-3" />
-              <Grid className="generator-results-row" row>
-                <h3 className="margin-y-0">Results</h3>
-                <a
-                  href={state.downloadUrl}
-                  download="cms-hpt.txt"
-                  className="usa-button margin-right-0"
-                >
-                  Download
-                </a>
-              </Grid>
+              desktop={{ col: 12 }}
+              className="bg-white display-flex flex-column flex-align-self-start margin-bottom-4">
+              <h2 className="margin-bottom-0">TXT File Instructions</h2>
+              <h3 className="margin-bottom-0"><u>Background</u></h3>
+              <p>As finalized in the CY2024 OPPS/ASC Final Rule, beginning January 1, 2024, each hospital must ensure
+that the public website it selects to host its machine-readable file (MRF) establishes and maintains, in
+the form and manner specified by CMS:
+                <ul>
+                  <li>A .txt file in the root folder that includes:
+                    <ul>
+                      <li> The hospital location name that corresponds to the MRF;</li> 
+                      <li> The source page URL that hosts the MRF;</li> 
+                      <li> A direct link to the MRF (the MRF URL); and</li> 
+                      <li> Hospital point of contact information.</li> 
+                    </ul>
+                  </li>
+                  <li>A link in the footer on its website, including but not limited to the homepage, that is labeled “Price Transparency” and links directly to the publicly available webpage that hosts the link to the MRF.</li>
+                </ul>
+                The purpose of these requirements is to facilitate automated access to hospital MRFs. Please refer to 45 CFR 180.50 (d)(6) and discussion at 88 FR 82111-82113.
+              </p>
 
-              <pre id="generator-output">{txtFileOutput(state.hospitals)}</pre>
-            </Grid>
-            <Grid
-              gap
-              desktop={{ col: 6 }}
-              className="border-top border-base-lighter padding-top-4 desktop:border-0 desktop:padding-top-0"
-            >
-              <div className="usa-prose">
-                <h1>How this tool helps</h1>
-                <p>
-                  This tool generates <code>cms-hpt.txt</code> files that can be
-                  placed at the root of a hospital&apos;s domain including
-                  information to improve discoverability of machine readable
-                  files.
-                </p>
-                <br></br>
-                <hr></hr>
-                <h2>Contact</h2>
-                <p>
-                  Have you run into an issue or have a question about this tool?
-                  Please reach out to us at{" "}
-                  <a href="mailto:PriceTransparencyHospitalCharges@cms.hhs.gov">
-                    PriceTransparencyHospitalCharges@cms.hhs.gov
-                  </a>
-                  .
-                </p>
-              </div>
+              <h3 className="margin-bottom-0"><u>TXT technical specifications</u></h3>
+              <p> Steps:
+                <ol>
+                  <li>Generate a TXT file that includes the required information indicated below.</li>
+                  <li>If the MRF contains standard charge information for more than one location, create an entry for each of the inpatient locations and standalone emergency hospitals in the TXT file.</li>
+                  <li>Name the file “cms-hpt.txt”.</li>
+                  <li>Place the TXT file on the root of the domain of the public website your hospital has selected to host its machine-readable file (MRF), without regard to page structure. As an example, a hospital with the website https://hospital.com would locate its file at https://hospital.com/cms-hpt.txt</li>
+              </ol>
+              </p>
+              <h3 className="margin-bottom-0"><u>Required Information for the TXT File</u></h3>
+              <table class="usa-table">
+                <thead>
+              <tr>
+                <th>Attribute: Value</th>
+                <th>Name</th>
+                <th>Definition</th>
+              </tr>
+    </thead>
+              <tr>
+                <td>location-name: [hospital location name]</td>
+                <td>Hospital Location Name</td>
+                <td>Indicate the hospital location name that corresponds to the standard charge information contained in the MRF.</td>
+              </tr>
+              <tr>
+                <td>source-page-url: [URL]</td>
+                <td>Source page URL</td>
+                <td>The source page URL is the URL of the public webpage you have selected to host the MRF.</td>
+              </tr>
+              <tr>
+                <td>mrf-url: [URL]</td>
+                <td>Machine-readable file URL</td>
+                <td>Indicate the URL of the MRF.</td>
+              </tr>
+              <tr>
+                <td>contact-name: [name]</td>
+                <td>POC Name</td>
+                <td>Indicate the name of a point of contact (POC) that is capable of answering technical questions about your hospital’s MRF and the data contained in it.</td>
+              </tr>
+              <tr>
+                <td>contact-email: [email]</td>
+                <td>Contact email</td>
+                <td>Indicate the email address of the POC you have designated to answer technical questions about your hospital’s MRF and the data contained in it.</td>
+              </tr>
+            </table>
+              <h3 className="margin-bottom-0"><u>Example TXT File</u></h3>
+              <p id="generator-output">
+                location-name: Test Hospital <br/>
+                source-page-url: https://example.com <br/>
+                mrf-url: https://example.com/HPT <br/>
+                contact-name: Jon Snow <br/>
+                contact-email: jsnow@example.com <br/>
+ <br/>
+                location-name: Test Hospital 2 <br/>
+                source-page-url: https://example2.com <br/>
+                mrf-url: https://example2.com/HPT <br/>
+                contact-name: Jane Doe <br/>
+                contact-email: jdoe@example2.com <br/>
+              </p>
             </Grid>
           </Grid>
         </section>
