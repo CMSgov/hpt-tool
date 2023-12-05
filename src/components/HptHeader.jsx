@@ -29,13 +29,6 @@ const HptHeader = () => {
     >
       MRF File name wizard
     </a>,
-    <a
-      key="primaryNav_3"
-      className="usa-nav__link"
-      href={`${import.meta.env.BASE_URL}txt-generator/`}
-    >
-      TXT generator
-    </a>,
   ]
 
   return (
