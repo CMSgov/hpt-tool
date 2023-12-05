@@ -147,13 +147,13 @@ const Validator = () => {
                 <h1>How this tool helps</h1>
                 <p>
                   This validation tool checks whether the Hospital Price
-                  Transparency machine-readable file matches CMS' Version 1.1 of
+                  Transparency machine-readable file matches CMS&apos; Version 1.1 of
                   the{" "}
                   <a href="https://www.cms.gov/hospital-price-transparency/resources">
                     Voluntary Sample Format and Data Dictionary
                   </a>{" "}
                   and will identify basic issues and errors when the uploaded
-                  file's structure and encoded data do not match Version 1.1
+                  file&apos;s structure and encoded data do not match Version 1.1
                   specifications.
                 </p>
                 <p>
