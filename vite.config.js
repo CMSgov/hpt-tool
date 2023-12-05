@@ -10,6 +10,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
         "filename-wizard": resolve(__dirname, "filename-wizard", "index.html"),
+        "txt-generator": resolve(__dirname, "txt-generator", "index.html"),
       },
     },
   },
