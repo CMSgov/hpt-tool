@@ -8,7 +8,7 @@
     "format": "prettier --write **/*.{js,jsx,css} !dist",
     "dev": "vite",
     "start": "vite",
-    "build": "vite build --base=/hpt-validator-tool/",
+    "build": "vite build --base=/hpt-tool/",
     "serve": "vite preview",
     "deploy": "echo 'NOT IMPLEMENTED'",
     "lint": "eslint \"./src/**/*.{js,jsx,ts}\"",
