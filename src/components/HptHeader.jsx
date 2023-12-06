@@ -20,14 +20,21 @@ const HptHeader = () => {
       className="usa-nav__link"
       href={import.meta.env.BASE_URL}
     >
-      Machine readable file
+      Machine Readable File
     </a>,
     <a
       key="primaryNav_2"
       className="usa-nav__link"
       href={`${import.meta.env.BASE_URL}filename-wizard/`}
     >
-      MRF File name wizard
+      MRF File Naming Wizard
+    </a>,
+    <a
+      key="primaryNav_3"
+      className="usa-nav__link"
+      href={`${import.meta.env.BASE_URL}txt-generator/`}
+    >
+      TXT File Generator
     </a>,
   ]
 
