@@ -119,7 +119,7 @@ const TxtGenerator = () => {
                 CMS:
                 <ul>
                   <li>
-                    A .txt file in the root folder that includes:
+                    A TXT file in the root folder that includes:
                     <ul>
                       <li>
                         {" "}
