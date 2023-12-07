@@ -3,12 +3,12 @@ import Clipboard from "clipboard"
 import { useEffect, useState } from "react"
 
 import {
-  /*  Alert,*/
+  Alert,
   Grid,
-  /*  Button,
+  Button,
   Label,
   TextInput,
-  FormGroup,*/
+  FormGroup,
 } from "@trussworks/react-uswds"
 import Layout from "../layouts"
 
@@ -28,12 +28,11 @@ contact-name: ${contactName}
 contact-email: ${contactEmail}`
     )
     .join("\n\n")
-/*
+
 const removeIndex = (array, index) => [
   ...array.slice(0, index),
   ...array.slice(index + 1),
 ]
-*/
 
 const TxtGenerator = () => {
   const baseHospital = {
@@ -61,13 +60,12 @@ const TxtGenerator = () => {
       downloadUrl: window.URL.createObjectURL(blob),
     })
   }, [state.hospitals])
-  /*
+
   const updateHospital = (index, updatedHospital) => {
     const hospitals = [...state.hospitals]
     hospitals[index] = { ...hospitals[index], ...updatedHospital }
     setState({ ...state, hospitals })
   }
-
 
   const getAlertParams = () => {
     if (
@@ -97,7 +95,7 @@ const TxtGenerator = () => {
   }
 
   const { type: alertType, message: alertMessage } = getAlertParams()
-*/
+
   return (
     <Layout>
       <div className="bg-base-lightest">
@@ -237,8 +235,8 @@ const TxtGenerator = () => {
                 contact-name: Jane Doe <br />
                 contact-email: jdoe@example2.com <br />
               </p>
-              {/*
-    <h2 className="margin-bottom-0">TXT File Generator</h2>
+
+              <h2 className="margin-bottom-0">TXT File Generator</h2>
               <form action="" method="GET">
                 {state.hospitals.map((hospital, index) => (
                   <FormGroup key={index}>
@@ -360,14 +358,21 @@ const TxtGenerator = () => {
                 <a
                   href={state.downloadUrl}
                   download="cms-hpt.txt"
-                  className="usa-button margin-right-0"
+                  className={
+                    "usa-button margin-right-0" +
+                    (alertType === "success" ? "" : " usa-button--disabled")
+                  }
+                  onClick={(e) => {
+                    if (alertType !== "success") {
+                      e.preventDefault()
+                    }
+                  }}
                 >
                   Download
                 </a>
               </Grid>
 
               <pre id="generator-output">{txtFileOutput(state.hospitals)}</pre>
-              */}
             </Grid>
           </Grid>
         </section>
