@@ -1,6 +1,7 @@
 import React from "react"
 import Clipboard from "clipboard"
 import { useEffect, useState } from "react"
+import validator from 'validator'
 
 import {
   Alert,
@@ -33,6 +34,9 @@ const removeIndex = (array, index) => [
   ...array.slice(0, index),
   ...array.slice(index + 1),
 ]
+
+const urlRegex = new RegExp(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/)
+
 
 const TxtGenerator = () => {
   const baseHospital = {
@@ -68,6 +72,7 @@ const TxtGenerator = () => {
   }
 
   const getAlertParams = () => {
+
     if (
       state.hospitals.length === 1 &&
       Object.values(state.hospitals[0]).every((v) => !v.trim())
@@ -77,6 +82,43 @@ const TxtGenerator = () => {
         message: "Fill in hospital fields to generate file",
       }
     }
+
+    if (
+      state.hospitals.some((hospital) => !!hospital.contactEmail) &&
+      state.hospitals.some((hospital) =>
+        !validator.isEmail(hospital.contactEmail)
+      )
+    ) {
+      return {
+        type: "error",
+        message: "Not a valid point-of-contact email",
+      }
+    }
+
+    if (
+      state.hospitals.some((hospital) => !!hospital.mrfUrl) &&
+      state.hospitals.some((hospital) =>
+        !hospital.mrfUrl.match(urlRegex)
+      )
+    ) {
+      return {
+        type: "error",
+        message: "Not a valid machine-readable file URL",
+      }
+    }
+
+    if (
+      state.hospitals.some((hospital) => !!hospital.sourcePageUrl) &&
+      state.hospitals.some((hospital) =>
+        !hospital.sourcePageUrl.match(urlRegex)
+      )
+    ) {
+      return {
+        type: "error",
+        message: "Not a valid source page URL",
+      }
+    }
+    
     if (
       state.hospitals.every((hospital) =>
         Object.values(hospital).every((v) => v.trim())
@@ -94,7 +136,7 @@ const TxtGenerator = () => {
     }
   }
 
-  const { type: alertType, message: alertMessage } = getAlertParams()
+  const { type: alertTypes, message: alertMessages } = getAlertParams()
 
   return (
     <Layout>
@@ -214,12 +256,12 @@ const TxtGenerator = () => {
                 Add
               </Button>
               <Alert
-                type={alertType}
+                type={alertTypes}
                 slim
                 aria-live="polite"
                 aria-atomic="true"
               >
-                {alertMessage}
+                {alertMessages}
               </Alert>
               <hr className="width-full margin-top-3 margin-bottom-3" />
               <Grid className="generator-results-row" row>
@@ -229,10 +271,10 @@ const TxtGenerator = () => {
                   download="cms-hpt.txt"
                   className={
                     "usa-button margin-right-0" +
-                    (alertType === "success" ? "" : " usa-button--disabled")
+                    (alertTypes === "success" ? "" : " usa-button--disabled")
                   }
                   onClick={(e) => {
-                    if (alertType !== "success") {
+                    if (alertTypes !== "success") {
                       e.preventDefault()
                     }
                   }}
