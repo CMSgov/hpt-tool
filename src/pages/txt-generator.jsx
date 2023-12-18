@@ -1,7 +1,7 @@
 import React from "react"
 import Clipboard from "clipboard"
 import { useEffect, useState } from "react"
-import validator from 'validator'
+import validator from "validator"
 
 import {
   Alert,
@@ -35,8 +35,9 @@ const removeIndex = (array, index) => [
   ...array.slice(index + 1),
 ]
 
-const urlRegex = new RegExp(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/)
-
+const urlRegex = new RegExp(
+  /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
+)
 
 const TxtGenerator = () => {
   const baseHospital = {
@@ -72,7 +73,6 @@ const TxtGenerator = () => {
   }
 
   const getAlertParams = () => {
-
     if (
       state.hospitals.length === 1 &&
       Object.values(state.hospitals[0]).every((v) => !v.trim())
@@ -85,8 +85,8 @@ const TxtGenerator = () => {
 
     if (
       state.hospitals.some((hospital) => !!hospital.contactEmail) &&
-      state.hospitals.some((hospital) =>
-        !validator.isEmail(hospital.contactEmail)
+      state.hospitals.some(
+        (hospital) => !validator.isEmail(hospital.contactEmail)
       )
     ) {
       return {
@@ -97,9 +97,7 @@ const TxtGenerator = () => {
 
     if (
       state.hospitals.some((hospital) => !!hospital.mrfUrl) &&
-      state.hospitals.some((hospital) =>
-        !hospital.mrfUrl.match(urlRegex)
-      )
+      state.hospitals.some((hospital) => !hospital.mrfUrl.match(urlRegex))
     ) {
       return {
         type: "error",
@@ -109,8 +107,8 @@ const TxtGenerator = () => {
 
     if (
       state.hospitals.some((hospital) => !!hospital.sourcePageUrl) &&
-      state.hospitals.some((hospital) =>
-        !hospital.sourcePageUrl.match(urlRegex)
+      state.hospitals.some(
+        (hospital) => !hospital.sourcePageUrl.match(urlRegex)
       )
     ) {
       return {
@@ -118,7 +116,7 @@ const TxtGenerator = () => {
         message: "Not a valid source page URL",
       }
     }
-    
+
     if (
       state.hospitals.every((hospital) =>
         Object.values(hospital).every((v) => v.trim())
