@@ -331,14 +331,16 @@ const TxtGenerator = () => {
                 Steps:
                 <ol>
                   <li>
-                    Generate a TXT file that includes the required information
-                    indicated below.
+                    Generate a TXT file based on the schema or via the TXT File
+                    Generator that includes the required information indicated
+                    below.
                   </li>
                   <li>
                     If the MRF contains standard charge information for more
-                    than one location, create an entry for each of the inpatient
-                    locations and standalone emergency hospitals in the TXT
-                    file.
+                    than one location, create a separate entry for each of the
+                    inpatient locations and standalone emergency hospitals in
+                    the TXT file (i.e., repeat the five attributes required in
+                    the TXT file with other location names).
                   </li>
                   <li>Name the file “cms-hpt.txt”.</li>
                   <li>
@@ -352,40 +354,41 @@ const TxtGenerator = () => {
                 </ol>
               </p>
               <h3 className="margin-bottom-0">
-                <u>Required Information for the TXT File</u>
+                <u>Requirements for the TXT File</u>
               </h3>
               <table className="usa-table">
                 <thead>
                   <tr>
+                    <th>Required Information</th>
                     <th>Attribute: Value</th>
-                    <th>Name</th>
-                    <th>Definition</th>
+                    <th>Instruction</th>
                   </tr>
                 </thead>
                 <tr>
-                  <td>location-name: [hospital location name]</td>
                   <td>Hospital Location Name</td>
+                  <td>location-name: [hospital location name]</td>
                   <td>
                     Indicate the hospital location name that corresponds to the
                     standard charge information contained in the MRF.
                   </td>
                 </tr>
                 <tr>
-                  <td>source-page-url: [URL]</td>
                   <td>Source page URL</td>
+                  <td>source-page-url: [URL]</td>
                   <td>
-                    The source page URL is the URL of the public webpage you
-                    have selected to host the MRF.
+                    Indicates the source page URL is the URL of the public
+                    webpage you have selected to host the MRF (i.e., the webpage
+                    from which the MRF can be directly downloaded).
                   </td>
                 </tr>
                 <tr>
-                  <td>mrf-url: [URL]</td>
                   <td>Machine-readable file URL</td>
+                  <td>mrf-url: [URL]</td>
                   <td>Indicate the URL of the MRF.</td>
                 </tr>
                 <tr>
-                  <td>contact-name: [name]</td>
                   <td>POC Name</td>
+                  <td>contact-name: [name]</td>
                   <td>
                     Indicate the name of a point of contact (POC) that is
                     capable of answering technical questions about your
@@ -393,8 +396,8 @@ const TxtGenerator = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td>contact-email: [email]</td>
                   <td>Contact email</td>
+                  <td>contact-email: [email]</td>
                   <td>
                     Indicate the email address of the POC you have designated to
                     answer technical questions about your hospital’s MRF and the
@@ -403,20 +406,97 @@ const TxtGenerator = () => {
                 </tr>
               </table>
               <h3 className="margin-bottom-0">
-                <u>Example TXT File</u>
+                <u>Example #1 TXT File</u>
               </h3>
+              <p>
+                This TXT file example demonstrates a scenario in which a
+                hospital has two locations (“Example Hospital East” and “Example
+                Hospital West”), each with its own set of standard charges.
+                Under the regulation, the hospital must maintain a separate MRF
+                for each location. A single TXT file, hosted in the root folder
+                of the hospital’s website, would include information for both
+                locations and their corresponding MRFs as separate entries.
+              </p>
+              <p>
+                In this example, the hospital’s website hosts the directly
+                downloadable links to the MRFs on the same source page, so the
+                source page URL is the same for both entries. However, the MRF
+                URL for each of the entries is unique.{" "}
+              </p>
+              <p>
+                Finally, in this example, the POC for the first MRF is a person
+                (Jon Snow) that can be reached at jsnow@example.com.
+              </p>
               <p id="generator-output">
-                location-name: Test Hospital <br />
-                source-page-url: https://example.com <br />
-                mrf-url: https://example.com/HPT <br />
+                location-name: Example Hospital East
+                <br />
+                source-page-url: https://example.com/price-transparency
+                <br />
+                mrf-url:
+                https://example.com/price-transparency/123456789_Example-Hospital-East_standardcharges.csv
+                <br />
                 contact-name: Jon Snow <br />
                 contact-email: jsnow@example.com <br />
                 <br />
-                location-name: Test Hospital 2 <br />
-                source-page-url: https://example2.com <br />
-                mrf-url: https://example2.com/HPT <br />
+                location-name: Example Hospital West
+                <br />
+                source-page-url: https://example.com/price-transparency <br />
+                mrf-url:
+                https://example.com/price-transparency/987654321_Example-Hospital-West_standardcharges.json
+                <br />
                 contact-name: Jane Doe <br />
                 contact-email: jdoe@example2.com <br />
+              </p>
+              <h3 className="margin-bottom-0">
+                <u>Example #2 TXT File</u>
+              </h3>
+              <p>
+                This TXT file example demonstrates a scenario in which a
+                hospital has two locations (“Sample Hospital” and “Sample
+                Standalone Emergency Department”) that share the same set of
+                standard charges. Under the regulation, it is permissible for
+                the two locations to share a single MRF. A single TXT file would
+                include information for both locations as separate entries and
+                repeat the shared source page URL and MRF URL.
+              </p>
+              <p>
+                In this example, the hospital’s “vendor” hosts the single MRF
+                for the hospital on the vendor’s website. The TXT file should
+                indicate the vendor’s source page URL and the MRF URL
+                established by the vendor for the MRF.
+              </p>
+              <p>
+                Finally, in this example, the POC for the file is a team of
+                people (MRF Department) that share an email address
+                (MRFteam@sample.com).
+              </p>
+              <p id="generator-output">
+                location-name: Sample Hospital <br />
+                source-page-url:
+                https://vendor.com/hospital-price-transparency-files/links/samplehospital.aspx
+                <br />
+                mrf-url:
+                https://vendor.com/hospital-price-transparency-files/links
+                /101010101_Sample_standardcharges.csv
+                <br />
+                contact-name: MRF Department
+                <br />
+                contact-email: MRFteam@sample.com
+                <br />
+                <br />
+                location-name: Sample Standalone Emergency Department
+                <br />
+                source-page-url:
+                https://vendor.com/hospital-price-transparency-files/links/samplehospital.aspx
+                <br />
+                mrf-url:
+                https://vendor.com/hospital-price-transparency-files/links
+                /101010101_Sample_standardcharges.csv
+                <br />
+                contact-name: MRF Department
+                <br />
+                contact-email: MRFteam@sample.com
+                <br />
               </p>
             </Grid>
           </Grid>
