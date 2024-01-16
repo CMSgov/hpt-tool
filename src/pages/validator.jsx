@@ -96,8 +96,7 @@ const Validator = () => {
                   Check back at this page in Spring 2024 for Validator 2.0. The
                   updated Validator will test Machine-readable files against the
                   new required CMS template layout and data specifications that
-                  hospitals must conform to by July 1, 2024, as outlined in the
-                  CY 2024 OPPS/ASC Final Rule.
+                  hospitals must conform to by July 1, 2024, as outlined in the <a href={"https://www.federalregister.gov/documents/2023/11/22/2023-24293/medicare-program-hospital-outpatient-prospective-payment-and-ambulatory-surgical-center-payment"}>CY 2024 OPPS/ASC Final Rule</a>.
                 </p>
                 <p>
                   Implementation guidance on the required CMS templates may be
