@@ -293,11 +293,18 @@ const TxtGenerator = () => {
                 <u>Background</u>
               </h3>
               <p>
-                As finalized in the <a href={"https://www.federalregister.gov/documents/2023/11/22/2023-24293/medicare-program-hospital-outpatient-prospective-payment-and-ambulatory-surgical-center-payment"}>CY2024 OPPS/ASC Final Rule</a>, beginning
-                January 1, 2024, each hospital must ensure that the public
-                website it selects to host its machine-readable file (MRF)
-                establishes and maintains, in the form and manner specified by
-                CMS:
+                As finalized in the{" "}
+                <a
+                  href={
+                    "https://www.federalregister.gov/documents/2023/11/22/2023-24293/medicare-program-hospital-outpatient-prospective-payment-and-ambulatory-surgical-center-payment"
+                  }
+                >
+                  CY2024 OPPS/ASC Final Rule
+                </a>
+                , beginning January 1, 2024, each hospital must ensure that the
+                public website it selects to host its machine-readable file
+                (MRF) establishes and maintains, in the form and manner
+                specified by CMS:
                 <ul>
                   <li>
                     A TXT file in the root folder that includes:
@@ -319,8 +326,39 @@ const TxtGenerator = () => {
                   </li>
                 </ul>
                 The purpose of these requirements is to facilitate automated
-                access to hospital MRFs. Please refer to <a href={"https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-E/part-180#p-180.50(d)(6)"}>45 CFR 180.50 (d)(6)</a>
-                and discussion at 88 FR <a href={"https://www.federalregister.gov/documents/2023/11/22/2023-24293/medicare-program-hospital-outpatient-prospective-payment-and-ambulatory-surgical-center-payment#p-5069"}>82111</a>-<a href={"https://www.federalregister.gov/documents/2023/11/22/2023-24293/medicare-program-hospital-outpatient-prospective-payment-and-ambulatory-surgical-center-payment#p-5088"}>82113</a>.
+                access to hospital MRFs. Please refer to{" "}
+                <a
+                  href={
+                    "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-E/part-180#p-180.50(d)(6)"
+                  }
+                >
+                  45 CFR 180.50 (d)(6)
+                </a>
+                and discussion at 88 FR{" "}
+                <a
+                  href={
+                    "https://www.federalregister.gov/documents/2023/11/22/2023-24293/medicare-program-hospital-outpatient-prospective-payment-and-ambulatory-surgical-center-payment#p-5069"
+                  }
+                >
+                  82111
+                </a>
+                -
+                <a
+                  href={
+                    "https://www.federalregister.gov/documents/2023/11/22/2023-24293/medicare-program-hospital-outpatient-prospective-payment-and-ambulatory-surgical-center-payment#p-5088"
+                  }
+                >
+                  82113
+                </a>
+                . Frequently Asked Questions on the TXT File may be found{" "}
+                <a
+                  href={
+                    "https://www.cms.gov/files/document/hospital-price-transparency-txt-file-frequently-asked-questions-faqs.pdf"
+                  }
+                >
+                  here
+                </a>
+                .
               </p>
 
               <h3 className="margin-bottom-0">
