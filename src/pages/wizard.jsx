@@ -85,17 +85,9 @@ const Wizard = () => {
             <Grid desktop={{ col: 6 }} className="bg-white margin-x-auto">
               <h1>Format your file name</h1>
               <p>
-                This tool helps you format your machine readable file as
-                outlined in the{" "}
-                <a
-                  href="https://www.cms.gov/files/document/steps-machine-readable-file.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <em>
-                    8 Steps to a Machine-Readable File of All Items and Service
-                  </em>
-                </a>
+                This tool helps you name your machine readable file in the
+                CMS-specified naming convention as required at 45 CFR
+                §180.50(d)(5).
               </p>
               <p>
                 The output of the wizard automatically updates at the bottom of
