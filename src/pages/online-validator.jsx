@@ -1,30 +1,29 @@
 import React from "react"
-// import { useState } from "react"
+import { useState } from "react"
 import {
-  // Label,
+  Label,
   Grid,
-  // FormGroup,
-  // Fieldset,
-  // Radio,
+  FormGroup,
+  Fieldset,
+  Radio,
 } from "@trussworks/react-uswds"
-// import { FileInput } from "../components/FileInput"
-// import ValidationResults from "../components/ValidationResults"
-// import { validateCsv, validateJson, validateFilename } from "hpt-validator"
+import { FileInput } from "../components/FileInput"
+import ValidationResults from "../components/ValidationResults"
+import { validateCsv, validateJson, validateFilename } from "hpt-validator"
 import Layout from "../layouts"
 
-// const MAX_ERRORS = 250
-// const STORAGE_PATH = "cms-hpt-validation-results"
+const MAX_ERRORS = 250
+const STORAGE_PATH = "cms-hpt-validation-results"
 
-// const SCHEMA_VERSIONS = ["v1.1", "v2.0"]
-/*
+const SCHEMA_VERSIONS = ["v1.1", "v2.0"]
+
 const getFileExtension = (filename) => {
   const splitFilename = filename.toLowerCase().split(".")
   if (splitFilename.length < 1) return null
   return splitFilename.slice(-1)[0]
 }
-*/
+
 const OnlineValidator = () => {
-  /*
   const [state, setState] = useState(
     JSON.parse(window.sessionStorage.getItem(STORAGE_PATH)) || {
       valid: true,
@@ -79,7 +78,6 @@ const OnlineValidator = () => {
 
   const locationHeader =
     getFileExtension(state.filename) === "csv" ? "CSV cell" : "JSON location"
-*/
   return (
     <Layout>
       <div className="bg-base-lightest">
