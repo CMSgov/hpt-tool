@@ -186,7 +186,8 @@ const ValidationResults = ({
                     )}
                     <br />
                     <span>
-                      These warnings represent requirements that are enforced beginning January 1, 2025. 
+                      These warnings represent requirements that are enforced
+                      beginning January 1, 2025.
                     </span>
                   </>
                 )}
