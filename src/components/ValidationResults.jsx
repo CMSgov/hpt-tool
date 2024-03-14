@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import { Grid, Alert, Table } from "@trussworks/react-uswds"
-
+/*
 const createCsvString = (errors, warnings) =>
   "location,message,type\n" +
   errors
@@ -17,7 +17,7 @@ const createCsvString = (errors, warnings) =>
         `"${path}","${message.replace(/"/gi, "")}","warning"`
     )
     .join("\n")
-
+*/
 const ValidationResults = ({
   filename,
   filenameValid,
@@ -31,12 +31,12 @@ const ValidationResults = ({
   didMount,
 }) => {
   const resultsHeaderRef = useRef(null)
-
+  /*
   const blob = new Blob([createCsvString(errors || [], warnings || [])], {
     type: "text/csv;charset=utf-8",
   })
   const downloadUrl = window.URL.createObjectURL(blob)
-
+*/
   const atMaxErrors = errors.length + warnings.length >= maxErrors
 
   useEffect(() => {
@@ -79,13 +79,14 @@ const ValidationResults = ({
           )}
           {!loading && !readError && filename && (
             <>
-              <a
+              {/* <a
                 className="usa-button"
                 href={downloadUrl}
                 download="cms-hpt-validator-results.csv"
               >
                 Download results as spreadsheet
-              </a>
+              </a> */}
+
               <h3>File name</h3>
               <Alert
                 type={filenameValid ? `success` : `error`}
@@ -105,7 +106,7 @@ const ValidationResults = ({
                     <span>
                       Must match format:
                       &lt;ein&gt;_&lt;hospitalname&gt;_standardcharges.[json|csv].{" "}
-                      <a href={`${import.meta.env.BASE_URL}filename-wizard`}>
+                      <a href={`${import.meta.env.BASE_URL}filename-wizard/`}>
                         Click here to use the file name wizard.
                       </a>
                     </span>
@@ -159,13 +160,6 @@ const ValidationResults = ({
                       ))}
                     </tbody>
                   </Table>
-                  <p>
-                    For further information about resolving these issues, please
-                    refer to the document:{" "}
-                    <a href="https://www.cms.gov/files/document/steps-machine-readable-file.pdf">
-                      8 Steps to a Machine-Readable File
-                    </a>
-                  </p>
                 </>
               )}
               <h3>Warnings</h3>
@@ -192,8 +186,8 @@ const ValidationResults = ({
                     )}
                     <br />
                     <span>
-                      These items are not required changes, but addressing them
-                      could save time in the future.
+                      These warnings represent requirements that are enforced
+                      beginning January 1, 2025.
                     </span>
                   </>
                 )}
@@ -203,7 +197,7 @@ const ValidationResults = ({
                   <thead>
                     <tr>
                       <th scope="col">{locationHeader}</th>
-                      <th scope="col">Error description</th>
+                      <th scope="col">Warning description</th>
                     </tr>
                   </thead>
                   <tbody>

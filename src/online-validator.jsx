@@ -1,7 +1,7 @@
 import "./polyfills.js"
 import React from "react"
 import ReactDOM from "react-dom/client"
-import Home from "./pages/home.jsx"
+import OnlineValidator from "./pages/online-validator.jsx"
 
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
@@ -12,6 +12,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"))
 
 root.render(
   <React.StrictMode>
-    <Home />
+    <OnlineValidator />
   </React.StrictMode>
 )

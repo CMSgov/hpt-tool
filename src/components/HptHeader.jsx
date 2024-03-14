@@ -18,16 +18,16 @@ const HptHeader = () => {
     <a
       key="primaryNav_1"
       className="usa-nav__link"
-      href={import.meta.env.BASE_URL}
+      href={`${import.meta.env.BASE_URL}online-validator/`}
     >
-      Machine Readable File
+      Online Validator
     </a>,
     <a
       key="primaryNav_2"
       className="usa-nav__link"
       href={`${import.meta.env.BASE_URL}filename-wizard/`}
     >
-      MRF File Naming Wizard
+      MRF Naming Wizard
     </a>,
     <a
       key="primaryNav_3"
@@ -47,7 +47,9 @@ const HptHeader = () => {
       <Header basic={true}>
         <div className="usa-nav-container">
           <div className="usa-navbar">
-            <Title>Hospital Price Transparency Tools</Title>
+            <Title>
+              <a href="/">Hospital Price Transparency Tools</a>
+            </Title>
 
             <NavMenuButton
               label="Menu"
