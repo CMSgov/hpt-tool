@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import { Grid, Alert, Table } from "@trussworks/react-uswds"
-
+/*
 const createCsvString = (errors, warnings) =>
   "location,message,type\n" +
   errors
@@ -17,7 +17,7 @@ const createCsvString = (errors, warnings) =>
         `"${path}","${message.replace(/"/gi, "")}","warning"`
     )
     .join("\n")
-
+*/
 const ValidationResults = ({
   filename,
   filenameValid,
@@ -31,12 +31,12 @@ const ValidationResults = ({
   didMount,
 }) => {
   const resultsHeaderRef = useRef(null)
-
+  /*
   const blob = new Blob([createCsvString(errors || [], warnings || [])], {
     type: "text/csv;charset=utf-8",
   })
   const downloadUrl = window.URL.createObjectURL(blob)
-
+*/
   const atMaxErrors = errors.length + warnings.length >= maxErrors
 
   useEffect(() => {
