@@ -93,7 +93,7 @@ const Home = () => {
                     </a>
                   </div>
                   <div className="grid-col-3">
-                    <a href={`${import.meta.env.BASE_URL}filename-wizard/`}>
+                    <a href={`https://github.com/CMSgov/hpt-validator-cli`}>
                       <img
                         alt="Hospital Price Transparency"
                         src={cliClient}
