@@ -28,7 +28,7 @@ const OnlineValidator = () => {
     JSON.parse(window.sessionStorage.getItem(STORAGE_PATH)) || {
       valid: true,
       filename: "",
-      schemaVersion: "v1.1",
+      schemaVersion: "v2.0",
       filenameValid: true,
       fileUrl: "",
       pageUrl: "",
@@ -94,7 +94,7 @@ const OnlineValidator = () => {
                     <p className="font-sans-xl text-bold margin-bottom-0">
                       Upload file
                     </p>
-                    Files must follow the voluntary sample format (.json or
+                    Files must be in a required CMS template format (.json or
                     .csv)
                   </Label>
                   <FileInput
@@ -144,43 +144,65 @@ const OnlineValidator = () => {
               className="border-top border-base-lighter padding-top-4 desktop:border-0 desktop:padding-top-0"
             >
               <div className="usa-prose">
-                <h1>How this tool helps</h1>
+                <h1>About This Tool</h1>
                 <p>
-                  This validation tool checks whether the Hospital Price
-                  Transparency machine-readable file matches CMS&apos; Version
-                  1.1 of the{" "}
-                  <a href="https://www.cms.gov/hospital-price-transparency/resources">
-                    Version 1.1 of the Voluntary Sample Format
-                  </a>{" "}
-                  and Data Dictionary and will identify basic issues and errors
-                  when the uploaded file&apos;s structure and encoded data do
-                  not match Version 1.1 specifications.
+                  The V2.0 Online Validator tool assists your hospital in
+                  developing a machine- readable file (MRF) to ensure it
+                  conforms to the required form and manner requirements (45 CFR
+                  180.50(c)(2)). These form and manner requirements are
+                  described in the{" "}
+                  <a href="https://www.federalregister.gov/documents/2023/11/22/2023-24293/medicare-program-hospital-outpatient-prospective-payment-and-ambulatory-surgical-center-payment">
+                    CY 2024 OPPS/ASC Final Rule
+                  </a>
+                  , and detailed technical specifications can be found in the{" "}
+                  <a href="https://github.com/CMSgov/hospital-price-transparency/">
+                    Hospital Price Transparency Data Dictionary GitHub
+                    Repository
+                  </a>
+                  .
+                </p>
+                <p>
+                  The Online Validator reviews your uploaded MRF against the
+                  required CMS template layout and data specifications. If your
+                  MRF does not conform to the form and manner requirements, the
+                  Online Validator will generate an output consisting of
+                  &apos;errors&apos; and &apos;warnings&apos;. Online Validator
+                  &apos;errors&apos; represent requirements that are enforced
+                  beginning July 1, 2024, whereas &apos;warnings&apos; represent
+                  requirements that are enforced beginning January 1, 2025. The
+                  Online Validator stops reviewing an MRF if there are more than
+                  250 errors. Additionally for CSV MRFs, the Online Validator
+                  stops reviewing if an error is found in row 1 through 3 (i.e.,
+                  errors in the general data element headers, general data
+                  element values, and standard charges, item/service, and coding
+                  headers). You should therefore address each error displayed
+                  and run your MRF through the Online Validator repeatedly until
+                  no more errors are generated.
                 </p>
                 <p>
                   <strong>
-                    Note that this validator does not test against the new
-                    required CMS template layout and data specifications that
-                    hospitals must conform to by July 1, 2024,
-                  </strong>{" "}
-                  as outlined in the CY 2024 OPPS/ASC Final Rule. Implementation
-                  guidance on the required CMS templates may be found on the{" "}
-                  <a href="https://github.com/CMSgov/hospital-price-transparency">
-                    Hospital Price Transparency Data Dictionary GitHub
-                    repository.
-                  </a>{" "}
-                  Validator 2.0 that aligns with the required CMS Templates will
-                  be available in Spring of 2024.
+                    Please note: Leveraging the Validator helps ensure adherence
+                    to CMS form and manner requirements (45 CFR 180.50(c)(2)),
+                    but it does not certify that your MRF fully complies with
+                    all HPT requirements at 45 CFR 180.50.
+                  </strong>
                 </p>
                 <p>
-                  This tool runs in the web browser and does not store any data.
-                  Uploading files here does not share these files with CMS. This
-                  validator tool is intended to be used with machine readable
-                  files that use the Version 1.1{" "}
-                  <a href="https://www.cms.gov/hospital-price-transparency/resources">
-                    Voluntary Sample Format
-                  </a>{" "}
-                  published by CMS and will not work for files that do not
-                  follow this formatting layout.
+                  Additionally, the Online Validator tool runs in a web browser
+                  and does not store, record, report, or share any information
+                  with CMS related to your hospital&apos;s use of the tool. In
+                  short, CMS does not track individual hospitals&apos; use of
+                  the Online Validator. However, if your hospital becomes
+                  subject to a compliance review, CMS may use the Validator to
+                  assess whether your hospital meets the form and manner
+                  requirements.
+                </p>
+                <p>
+                  For frequently asked questions and answers about the
+                  validator, please refer to the Validator FAQs available on the
+                  Hospital Price Transparency Resources Page. For other
+                  validator questions or concerns, you may email
+                  PriceTransparencyHospitalCharges@cms.hhs.gov.
                 </p>
                 <br></br>
                 <hr></hr>
