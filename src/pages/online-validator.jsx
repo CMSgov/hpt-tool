@@ -198,10 +198,7 @@ const OnlineValidator = () => {
                   requirements.
                 </p>
                 <p>
-                  For frequently asked questions and answers about the
-                  validator, please refer to the Validator FAQs available on the
-                  Hospital Price Transparency Resources Page. For other
-                  validator questions or concerns, you may email
+                  For validator questions or concerns, you may email
                   PriceTransparencyHospitalCharges@cms.hhs.gov.
                 </p>
                 <br></br>
