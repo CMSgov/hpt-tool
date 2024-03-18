@@ -48,7 +48,7 @@ const HptHeader = () => {
         <div className="usa-nav-container">
           <div className="usa-navbar">
             <Title>
-              <a href="/">Hospital Price Transparency Tools</a>
+              <a href="/hpt-tool/">Hospital Price Transparency Tools</a>
             </Title>
 
             <NavMenuButton
