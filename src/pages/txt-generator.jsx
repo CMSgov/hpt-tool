@@ -10,6 +10,8 @@ import {
   Label,
   TextInput,
   FormGroup,
+  Fieldset,
+  Radio,
 } from "@trussworks/react-uswds"
 import Layout from "../layouts"
 
@@ -28,6 +30,27 @@ mrf-url: ${mrfUrl}
 contact-name: ${contactName}
 contact-email: ${contactEmail}`
     )
+    .join("\n\n")
+
+const metaTagOutput = (hospitals) =>
+  hospitals
+    .map((hospital, idx) => {
+      const prefix = "og:reg:hpt"
+      const suffix = hospitals.length > 1 ? `:${idx + 1}` : ``
+      const hospitalProperties = [
+        ["location-name", hospital.name],
+        ["source-page-url", hospital.sourcePageUrl],
+        ["mrf-url", hospital.mrfUrl],
+        ["contact-name", hospital.contactName],
+        ["contact-email", hospital.contactEmail],
+      ]
+      return hospitalProperties
+        .map(
+          ([prop, value]) =>
+            `<meta property="${prefix}:${prop}${suffix}" content="${value}" />`
+        )
+        .join("\n")
+    })
     .join("\n\n")
 
 const removeIndex = (array, index) => [
@@ -50,6 +73,7 @@ const TxtGenerator = () => {
   const [state, setState] = useState({
     hospitals: [{ ...baseHospital }],
     downloadUrl: "",
+    outputFormat: "txt",
   })
 
   useEffect(() => {
@@ -57,14 +81,21 @@ const TxtGenerator = () => {
   }, [])
 
   useEffect(() => {
-    let blob = new Blob([txtFileOutput(state.hospitals)], {
-      type: "text/plain;charset=utf8",
-    })
+    let blob
+    if (state.outputFormat === "txt") {
+      blob = new Blob([txtFileOutput(state.hospitals)], {
+        type: "text/plain;charset=utf8",
+      })
+    } else if (state.outputFormat === "html") {
+      blob = new Blob([metaTagOutput(state.hospitals)], {
+        type: "text/html;charset=utf8",
+      })
+    }
     setState({
       ...state,
       downloadUrl: window.URL.createObjectURL(blob),
     })
-  }, [state.hospitals])
+  }, [state.hospitals, state.outputFormat])
 
   const updateHospital = (index, updatedHospital) => {
     const hospitals = [...state.hospitals]
@@ -261,12 +292,34 @@ const TxtGenerator = () => {
               >
                 {alertMessages}
               </Alert>
+              <Fieldset
+                legend="Output format"
+                className="usa-form-group output-format-fieldset"
+                onChange={(e) => {
+                  setState({ ...state, outputFormat: e.target.value })
+                }}
+              >
+                <Radio
+                  id="output-format-txt"
+                  name="output-format"
+                  label="TXT"
+                  value="txt"
+                  checked={state.outputFormat === "txt"}
+                />
+                <Radio
+                  id="output-format-html"
+                  name="output-format"
+                  label="HTML meta tags"
+                  value="html"
+                  checked={state.outputFormat === "html"}
+                />
+              </Fieldset>
               <hr className="width-full margin-top-3 margin-bottom-3" />
               <Grid className="generator-results-row" row>
                 <h3 className="margin-y-0">Results</h3>
                 <a
                   href={state.downloadUrl}
-                  download="cms-hpt.txt"
+                  download={`cms-hpt.${state.outputFormat}`}
                   className={
                     "usa-button margin-right-0" +
                     (alertTypes === "success" ? "" : " usa-button--disabled")
@@ -281,7 +334,11 @@ const TxtGenerator = () => {
                 </a>
               </Grid>
 
-              <pre id="generator-output">{txtFileOutput(state.hospitals)}</pre>
+              <pre id="generator-output">
+                {state.outputFormat === "txt" && txtFileOutput(state.hospitals)}
+                {state.outputFormat === "html" &&
+                  metaTagOutput(state.hospitals)}
+              </pre>
               <br />
               <h3 className="margin-bottom-0">
                 <u>Example #1 TXT File</u>
