@@ -127,7 +127,6 @@ const OnlineValidator = () => {
                   Loading file {state.filename}...
                 </p>
               )}
-              
             </Grid>
             <Grid
               gap
