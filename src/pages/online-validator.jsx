@@ -9,7 +9,7 @@ import {
 } from "@trussworks/react-uswds"
 import { FileInput } from "../components/FileInput"
 import ValidationResults from "../components/ValidationResults"
-import { validateCsv, validateJson, validateFilename } from "hpt-validator"
+import { validateCsv, validateJson } from "hpt-validator"
 import Layout from "../layouts"
 
 const MAX_ERRORS = 250
@@ -29,7 +29,6 @@ const OnlineValidator = () => {
       valid: true,
       filename: "",
       schemaVersion: "v2.0",
-      filenameValid: true,
       fileUrl: "",
       pageUrl: "",
       loading: false,
@@ -44,7 +43,6 @@ const OnlineValidator = () => {
     const file = evt.target.files[0]
     const initialState = {
       filename: file.name,
-      filenameValid: validateFilename(file.name),
       schemaVersion: state.schemaVersion,
     }
     setState({ ...state, ...initialState, readError: false, loading: true })
@@ -129,14 +127,6 @@ const OnlineValidator = () => {
                   Loading file {state.filename}...
                 </p>
               )}
-              <p className="text-italic">
-                Having trouble formatting your file name?
-              </p>
-              <p className="text-italic text-bold">
-                <a href={`${import.meta.env.BASE_URL}filename-wizard/`}>
-                  Leverage the file name wizard!
-                </a>
-              </p>
             </Grid>
             <Grid
               gap
@@ -211,7 +201,6 @@ const OnlineValidator = () => {
       <section className="grid-container usa-section">
         <ValidationResults
           filename={state.filename}
-          filenameValid={state.filenameValid}
           valid={state.valid}
           errors={state.errors}
           warnings={state.warnings}
