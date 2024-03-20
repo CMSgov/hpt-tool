@@ -9,7 +9,7 @@ import {
 } from "@trussworks/react-uswds"
 import { FileInput } from "../components/FileInput"
 import ValidationResults from "../components/ValidationResults"
-import { validateCsv, validateJson, validateFilename } from "hpt-validator"
+import { validateCsv, validateJson } from "hpt-validator"
 import Layout from "../layouts"
 
 const MAX_ERRORS = 250
