@@ -20,7 +20,6 @@ const createCsvString = (errors, warnings) =>
 */
 const ValidationResults = ({
   filename,
-  filenameValid,
   valid,
   errors,
   warnings,
@@ -86,33 +85,6 @@ const ValidationResults = ({
               >
                 Download results as spreadsheet
               </a> */}
-
-              <h3>File name</h3>
-              <Alert
-                type={filenameValid ? `success` : `error`}
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                {filenameValid ? (
-                  <>
-                    <span className="text-bold">File name valid</span>:{" "}
-                    <span className="text-underline">{filename}</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="text-bold">File name invalid</span>:{" "}
-                    <span className="text-underline">{filename}</span>
-                    <br />
-                    <span>
-                      Must match format:
-                      &lt;ein&gt;_&lt;hospitalname&gt;_standardcharges.[json|csv].{" "}
-                      <a href={`${import.meta.env.BASE_URL}filename-wizard/`}>
-                        Click here to use the file name wizard.
-                      </a>
-                    </span>
-                  </>
-                )}
-              </Alert>
               <h3>Errors</h3>
               <Alert
                 type={valid ? `success` : `error`}
@@ -220,7 +192,6 @@ const ValidationResults = ({
 
 ValidationResults.propTypes = {
   filename: PropTypes.string,
-  filenameValid: PropTypes.bool,
   valid: PropTypes.bool,
   errors: PropTypes.arrayOf(PropTypes.object),
   warnings: PropTypes.arrayOf(PropTypes.object),
