@@ -188,6 +188,13 @@ const OnlineValidator = () => {
                   requirements.
                 </p>
                 <p>
+                  For a video demonstration of how to use the CMS Hospital Price
+                  Transparency Online Validator tool, please visit{" "}
+                  <a href="https://www.youtube.com/watch?v=e6b9kN9B11c">
+                    https://www.youtube.com/watch?v=e6b9kN9B11c
+                  </a>{" "}
+                </p>
+                <p>
                   For validator questions or concerns, you may email
                   PriceTransparencyHospitalCharges@cms.hhs.gov.
                 </p>
