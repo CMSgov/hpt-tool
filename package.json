@@ -31,7 +31,7 @@
     "esm": "^3.2.25",
     "prettier": "^2.8.8",
     "prettier-eslint": "^15.0.1",
-    "vite": "^4.5.0"
+    "vite": "^4.5.2"
   },
   "dependencies": {
     "@babel/preset-react": "^7.23.3",
