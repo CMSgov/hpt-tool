@@ -78,3 +78,7 @@ body,
   max-width: 100%;
   overflow-x: scroll;
 }
+
+.output-format-fieldset {
+  margin-top: 0;
+}
