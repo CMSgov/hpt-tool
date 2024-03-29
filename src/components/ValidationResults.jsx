@@ -36,7 +36,8 @@ const ValidationResults = ({
   })
   const downloadUrl = window.URL.createObjectURL(blob)
 */
-  const atMaxErrors = errors.length + warnings.length >= maxErrors
+  const atMaxErrors = errors.length >= maxErrors
+  const atMaxWarnings = warnings.length >= maxErrors
 
   useEffect(() => {
     if (didMount && !loading && resultsHeaderRef.current) {
@@ -99,16 +100,36 @@ const ValidationResults = ({
                 ) : (
                   <>
                     <span className="text-bold">
+                      There
                       {errors.length === 1
-                        ? "1 error"
-                        : `${errors.length} errors`}{" "}
-                      found in file
+                        ? " is 1 error"
+                        : ` are ${atMaxErrors ? "at least " : ""}${
+                            errors.length
+                          } errors`}{" "}
+                      found in the file
                     </span>
                     : <span className="text-underline">{filename}</span>
                     <br />
                     {atMaxErrors && (
                       <span>
-                        Only the first {maxErrors} errors and warnings are shown
+                        The first {maxErrors} errors are shown below. See the{" "}
+                        <a href="https://github.com/CMSgov/hospital-price-transparency/">
+                          Hospital Price Transparency Data Dictionary GitHub
+                          Repository
+                        </a>{" "}
+                        for detailed technical specifications to understand and
+                        address these errors.
+                      </span>
+                    )}
+                    {!atMaxErrors && (
+                      <span>
+                        See the{" "}
+                        <a href="https://github.com/CMSgov/hospital-price-transparency/">
+                          Hospital Price Transparency Data Dictionary GitHub
+                          Repository
+                        </a>{" "}
+                        for detailed technical specifications to understand and
+                        address these errors.
                       </span>
                     )}
                   </>
@@ -124,12 +145,14 @@ const ValidationResults = ({
                       </tr>
                     </thead>
                     <tbody>
-                      {errors.map(({ path, message }, index) => (
-                        <tr key={index}>
-                          <td>{path}</td>
-                          <td>{message}</td>
-                        </tr>
-                      ))}
+                      {errors
+                        .slice(0, maxErrors)
+                        .map(({ path, message }, index) => (
+                          <tr key={index}>
+                            <td>{path}</td>
+                            <td>{message}</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </Table>
                 </>
@@ -144,16 +167,19 @@ const ValidationResults = ({
                 ) : (
                   <>
                     <span className="text-bold">
+                      There
                       {warnings.length === 1
-                        ? "1 warning"
-                        : `${warnings.length} warnings`}{" "}
-                      for file
+                        ? " is 1 warning"
+                        : ` are ${atMaxWarnings ? "at least " : ""}${
+                            warnings.length
+                          } warnings`}{" "}
+                      found in the file
                     </span>
                     : <span className="text-underline">{filename}</span>
                     <br />
-                    {atMaxErrors && (
+                    {atMaxWarnings && (
                       <span>
-                        Only the first {maxErrors} errors and warnings are shown
+                        The first {maxErrors} warnings are shown below.
                       </span>
                     )}
                     <br />
@@ -173,12 +199,14 @@ const ValidationResults = ({
                     </tr>
                   </thead>
                   <tbody>
-                    {warnings.map(({ path, message }, index) => (
-                      <tr key={index}>
-                        <td>{path}</td>
-                        <td>{message}</td>
-                      </tr>
-                    ))}
+                    {warnings
+                      .slice(0, maxErrors)
+                      .map(({ path, message }, index) => (
+                        <tr key={index}>
+                          <td>{path}</td>
+                          <td>{message}</td>
+                        </tr>
+                      ))}
                   </tbody>
                 </Table>
               )}
