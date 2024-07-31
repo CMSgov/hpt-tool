@@ -54,8 +54,8 @@ export const FileInput = ({
     if (accept) {
       const acceptedTypes = accept.split(",")
       let allFilesAllowed = true
-      for (let i = 0; i < e.dataTransfer.files.length; i += 1) {
-        const file = e.dataTransfer.files[parseInt(`${i}`)]
+      for (let i = 0; i < e.target.files.length; i += 1) {
+        const file = e.target.files[parseInt(`${i}`)]
         if (allFilesAllowed) {
           for (let j = 0; j < acceptedTypes.length; j += 1) {
             const fileType = acceptedTypes[parseInt(`${j}`)]
@@ -73,6 +73,7 @@ export const FileInput = ({
         e.preventDefault()
         e.stopPropagation()
       }
+      return allFilesAllowed
     }
   }
 
@@ -80,15 +81,16 @@ export const FileInput = ({
   const handleDragOver = () => setIsDragging(true)
   const handleDragLeave = () => setIsDragging(false)
   const handleDrop = (e) => {
-    preventInvalidFiles(e)
     setIsDragging(false)
     if (onDrop) onDrop(e)
   }
 
   const handleChange = (e) => {
-    setShowError(false)
-    setFile(e.target.files.length > 0 ? e.target.files[0] : null)
-    if (onChange) onChange(e)
+    const allFilesAllowed = preventInvalidFiles(e)
+    if (allFilesAllowed) {
+      setFile(e.target.files.length > 0 ? e.target.files[0] : null)
+      if (onChange) onChange(e)
+    }
   }
 
   return (
