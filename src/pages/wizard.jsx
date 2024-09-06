@@ -18,6 +18,7 @@ import Layout from "../layouts"
 const STORAGE_PATH = "cms-hpt-file-name-wizard"
 
 const EIN_REGEX = /^\d{2}-?\d{7}$/
+//const EIN_REGEX = /^\d{9}$/
 const NPI_REGEX = /^\d{10}$/
 
 const Wizard = () => {
@@ -40,9 +41,9 @@ const Wizard = () => {
   }, [state.name, state.ein, state.fileType, state.npi])
 
   const getFilename = () =>
-    `${state.ein || "<ein>"}${
+    `${state.ein.replace(/-/g,"") || "<ein>"}${
       state.showNpi && state.npi ? `-${state.npi}` : ``
-    }_${state.name.replace(/\s/g, "-") || "<hospitalname>"}_standardcharges.${
+    }_${state.name.replace(/\s/g, "-").toLowerCase() || "<hospitalname>"}_standardcharges.${
       state.fileType || "<format>"
     }`
 
@@ -60,7 +61,7 @@ const Wizard = () => {
       if (!state.ein.match(EIN_REGEX)) {
         return {
           type: "error",
-          message: `EIN must be 9 digits in the format XX-XXXXXXX or XXXXXXXXX`,
+          message: `EIN must be 9 digits in the format XXXXXXXXX`,
         }
       } else if (state.showNpi && state.npi && !state.npi.match(NPI_REGEX)) {
         return {
