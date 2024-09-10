@@ -18,7 +18,6 @@ import Layout from "../layouts"
 const STORAGE_PATH = "cms-hpt-file-name-wizard"
 
 const EIN_REGEX = /^\d{2}-?\d{7}$/
-//const EIN_REGEX = /^\d{9}$/
 const NPI_REGEX = /^\d{10}$/
 
 const Wizard = () => {
@@ -41,11 +40,11 @@ const Wizard = () => {
   }, [state.name, state.ein, state.fileType, state.npi])
 
   const getFilename = () =>
-    `${state.ein.replace(/-/g,"") || "<ein>"}${
+    `${state.ein.replace(/-/g, "") || "<ein>"}${
       state.showNpi && state.npi ? `-${state.npi}` : ``
-    }_${state.name.replace(/\s/g, "-").toLowerCase() || "<hospitalname>"}_standardcharges.${
-      state.fileType || "<format>"
-    }`
+    }_${
+      state.name.replace(/\s/g, "-").toLowerCase() || "<hospitalname>"
+    }_standardcharges.${state.fileType || "<format>"}`
 
   const getAlertParams = () => {
     if (!(state.name.trim() && state.ein.trim() && state.fileType)) {
