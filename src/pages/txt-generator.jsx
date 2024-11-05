@@ -94,7 +94,7 @@ const TxtGenerator = () => {
         message: "Not a valid point-of-contact email",
       }
     }
-    
+
     if (
       state.hospitals.some((hospital) => !!hospital.mrfUrl) &&
       state.hospitals.some((hospital) => !hospital.mrfUrl.match(urlRegex))
