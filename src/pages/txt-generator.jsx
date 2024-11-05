@@ -36,7 +36,7 @@ const removeIndex = (array, index) => [
 ]
 
 const urlRegex = new RegExp(
-  /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
+  /(https?:\/\/(?:\.|(?!))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:\.|(?!))[a-zA-Z0-9]+\.[^\s]{2,}|\.[a-zA-Z0-9]+\.[^\s]{2,})/
 )
 
 const TxtGenerator = () => {
@@ -94,7 +94,7 @@ const TxtGenerator = () => {
         message: "Not a valid point-of-contact email",
       }
     }
-
+    
     if (
       state.hospitals.some((hospital) => !!hospital.mrfUrl) &&
       state.hospitals.some((hospital) => !hospital.mrfUrl.match(urlRegex))
