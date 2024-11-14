@@ -36,7 +36,7 @@ const removeIndex = (array, index) => [
 ]
 
 const urlRegex = new RegExp(
-  /(https?:\/\/(?:\.|(?!))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:\.|(?!))[a-zA-Z0-9]+\.[^\s]{2,}|\.[a-zA-Z0-9]+\.[^\s]{2,})/
+  /^(https?:\/\/(?:|(?!))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:\.|(?!))[a-zA-Z0-9]+\.[^\s]{2,}|\.[a-zA-Z0-9]+\.[^\s]{2,})$/
 )
 
 const TxtGenerator = () => {
