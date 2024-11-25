@@ -91,6 +91,8 @@ export const FileInput = ({
       setFile(e.target.files.length > 0 ? e.target.files[0] : null)
       if (onChange) onChange(e)
     }
+    // Clear out the value to allow for the same filename to trigger the onChange multiple times in a row.
+    e.target.value = null
   }
 
   return (
