@@ -1,6 +1,6 @@
 {
   "name": "hpt-validator-tool",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "author": "CMS Open Source <opensource@cms.hhs.gov>",
   "license": "CC0-1.0",
   "description": "Validator tool for CMS Hospital Price Transparency machine-readable files",
@@ -15,7 +15,8 @@
     "lint": "eslint \"./src/**/*.{js,jsx,ts}\"",
     "lint:fix": "eslint --quiet --fix \"./src/**/*.{js,jsx,ts}\"",
     "prettier": "prettier --check \"./src/**/*.{js,jsx,css}\"",
-    "prettier:fix": "prettier --write \"./src/**/*.{js,jsx,css}\""
+    "prettier:fix": "prettier --write \"./src/**/*.{js,jsx,css}\"",
+    "test": "vitest"
   },
   "devDependencies": {
     "@babel/core": "^7.25.8",
@@ -32,7 +33,9 @@
     "esm": "^3.2.25",
     "prettier": "^3.3.3",
     "prettier-eslint": "^16.3.0",
-    "vite": "^5.4.9"
+    "vite": "^5.4.9",
+    "vitest": "^2.1.4",
+    "jsdom": "^25.0.1"
   },
   "dependencies": {
     "@babel/preset-react": "^7.25.7",

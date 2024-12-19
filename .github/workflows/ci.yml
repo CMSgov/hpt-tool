@@ -25,7 +25,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: "19.x"
+          node-version: "20.x"
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -44,6 +44,9 @@ jobs:
       - name: Check code style
         run: npm run prettier
 
+      - name: Run tests
+        run: npm run test
+
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
@@ -53,7 +56,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: "19.x"
+          node-version: "20.x"
 
       - name: Cache dependencies
         uses: actions/cache@v3
