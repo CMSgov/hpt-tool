@@ -157,59 +157,6 @@ const ValidationResults = ({
                   </Table>
                 </>
               )}
-              <h3>Warnings</h3>
-              <Alert type={warnings.length === 0 ? `success` : `warning`}>
-                {warnings.length === 0 ? (
-                  <>
-                    <span className="text-bold">No warnings found in file</span>
-                    : <span className="text-underline">{filename}</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="text-bold">
-                      There
-                      {warnings.length === 1
-                        ? " is 1 warning"
-                        : ` are ${atMaxWarnings ? "at least " : ""}${
-                            warnings.length
-                          } warnings`}{" "}
-                      found in the file
-                    </span>
-                    : <span className="text-underline">{filename}</span>
-                    <br />
-                    {atMaxWarnings && (
-                      <span>
-                        The first {maxErrors} warnings are shown below.
-                      </span>
-                    )}
-                    <br />
-                    <span>
-                      These warnings represent requirements that are enforced
-                      beginning January 1, 2025.
-                    </span>
-                  </>
-                )}
-              </Alert>
-              {warnings.length > 0 && (
-                <Table className="width-full" bordered striped>
-                  <thead>
-                    <tr>
-                      <th scope="col">{locationHeader}</th>
-                      <th scope="col">Warning description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {warnings
-                      .slice(0, maxErrors)
-                      .map(({ path, message }, index) => (
-                        <tr key={index}>
-                          <td>{path}</td>
-                          <td>{message}</td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </Table>
-              )}
             </>
           )}
         </div>

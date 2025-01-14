@@ -156,18 +156,15 @@ const OnlineValidator = () => {
                   required CMS template layout and data specifications. If your
                   MRF does not conform to the form and manner requirements, the
                   Online Validator will generate an output consisting of
-                  &apos;errors&apos; and &apos;warnings&apos;. Online Validator
-                  &apos;errors&apos; represent requirements that are enforced
-                  beginning July 1, 2024, whereas &apos;warnings&apos; represent
-                  requirements that are enforced beginning January 1, 2025. The
-                  Online Validator stops reviewing an MRF if there are more than
-                  250 errors. Additionally for CSV MRFs, the Online Validator
-                  stops reviewing if an error is found in row 1 through 3 (i.e.,
-                  errors in the general data element headers, general data
-                  element values, and standard charges, item/service, and coding
-                  headers). You should therefore address each error displayed
-                  and run your MRF through the Online Validator repeatedly until
-                  no more errors are generated.
+                  &apos;errors&apos;. The Online Validator stops reviewing an
+                  MRF if there are more than 250 errors. Additionally for CSV
+                  MRFs, the Online Validator stops reviewing if an error is
+                  found in row 1 through 3 (i.e., errors in the general data
+                  element headers, general data element values, and standard
+                  charges, item/service, and coding headers). You should
+                  therefore address each error displayed and run your MRF
+                  through the Online Validator repeatedly until no more errors
+                  are generated.
                 </p>
                 <p>
                   <strong>
