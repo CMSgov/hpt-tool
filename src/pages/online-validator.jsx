@@ -36,6 +36,8 @@ const OnlineValidator = () => {
       readError: false,
       errors: [],
       warnings: [],
+      startTimestamp: "",
+      endTimestamp: "",
     }
   )
 
@@ -49,6 +51,7 @@ const OnlineValidator = () => {
     const fileExt = getFileExtension(file.name)
     if (["csv", "json"].includes(fileExt)) {
       try {
+        const startTimestamp = new Date().toString()
         const { valid, errors } = await (fileExt === "csv"
           ? validateCsv(file, state.schemaVersion, { maxErrors: MAX_ERRORS })
           : validateJson(file, state.schemaVersion, { maxErrors: MAX_ERRORS }))
@@ -59,6 +62,8 @@ const OnlineValidator = () => {
           warnings: errors.filter(({ warning }) => warning),
           loading: false,
           didMount: true,
+          startTimestamp,
+          endTimestamp: new Date().toString(),
         }
         setState(stateObj)
         window.sessionStorage.setItem(STORAGE_PATH, JSON.stringify(stateObj))
@@ -228,6 +233,8 @@ const OnlineValidator = () => {
           readError={state.readError}
           loading={state.loading}
           didMount={state.didMount}
+          startTimestamp={state.startTimestamp}
+          endTimestamp={state.endTimestamp}
         />
       </section>
     </Layout>
