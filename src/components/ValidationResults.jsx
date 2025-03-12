@@ -1,23 +1,14 @@
 import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import { Grid, Alert, Table } from "@trussworks/react-uswds"
-/*
-const createCsvString = (errors, warnings) =>
-  "location,message,type\n" +
-  errors
-    .map(
-      ({ path, message }) => `"${path}","${message.replace(/"/gi, "")}","error"`
-    )
 
-    .join("\n") +
-  "\n" +
-  warnings
-    .map(
-      ({ path, message }) =>
-        `"${path}","${message.replace(/"/gi, "")}","warning"`
-    )
+const createCsvString = (locationHeader, errors) =>
+  `${locationHeader},Error description\n` +
+  errors
+    .map(({ path, message }) => `"${path}","${message.replace(/"/gi, "")}"`)
+
     .join("\n")
-*/
+
 const ValidationResults = ({
   filename,
   valid,
@@ -30,14 +21,13 @@ const ValidationResults = ({
   didMount,
 }) => {
   const resultsHeaderRef = useRef(null)
-  /*
-  const blob = new Blob([createCsvString(errors || [], warnings || [])], {
+
+  const blob = new Blob([createCsvString(locationHeader, errors || [])], {
     type: "text/csv;charset=utf-8",
   })
   const downloadUrl = window.URL.createObjectURL(blob)
-*/
+
   const atMaxErrors = errors.length >= maxErrors
-  const atMaxWarnings = warnings.length >= maxErrors
 
   useEffect(() => {
     if (didMount && !loading && resultsHeaderRef.current) {
@@ -79,13 +69,15 @@ const ValidationResults = ({
           )}
           {!loading && !readError && filename && (
             <>
-              {/* <a
-                className="usa-button"
-                href={downloadUrl}
-                download="cms-hpt-validator-results.csv"
-              >
-                Download results as spreadsheet
-              </a> */}
+              {
+                <a
+                  className="usa-button"
+                  href={downloadUrl}
+                  download="cms-hpt-validator-results.csv"
+                >
+                  Download results as spreadsheet
+                </a>
+              }
               <h3>Errors</h3>
               <Alert
                 type={valid ? `success` : `error`}
