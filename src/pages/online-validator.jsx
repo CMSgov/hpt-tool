@@ -136,6 +136,14 @@ const OnlineValidator = () => {
               <div className="usa-prose">
                 <h1>About This Tool</h1>
                 <p>
+                  <strong>
+                    Please note: Leveraging the Validator helps ensure adherence
+                    to CMS form and manner requirements (45 CFR 180.50(c)(2)),
+                    but it does not certify that your MRF fully complies with
+                    all HPT requirements at 45 CFR 180.50.
+                  </strong>
+                </p>
+                <p>
                   The V2.0 Online Validator tool assists your hospital in
                   developing a machine- readable file (MRF) to ensure it
                   conforms to the required form and manner requirements (45 CFR
@@ -165,14 +173,6 @@ const OnlineValidator = () => {
                   therefore address each error displayed and run your MRF
                   through the Online Validator repeatedly until no more errors
                   are generated.
-                </p>
-                <p>
-                  <strong>
-                    Please note: Leveraging the Validator helps ensure adherence
-                    to CMS form and manner requirements (45 CFR 180.50(c)(2)),
-                    but it does not certify that your MRF fully complies with
-                    all HPT requirements at 45 CFR 180.50.
-                  </strong>
                 </p>
                 <p>
                   Additionally, the Online Validator tool runs in a web browser
