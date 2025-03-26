@@ -94,6 +94,10 @@ const ValidationResults = ({
                 aria-live="polite"
                 aria-atomic="true"
               >
+                <span class="text-bold">
+                  Using hpt-validator version 1.10.0
+                </span>
+                <br />
                 <span className="text-bold">
                   Validator run started at {startTimestamp}
                 </span>
