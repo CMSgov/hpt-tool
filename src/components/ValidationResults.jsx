@@ -19,6 +19,8 @@ const ValidationResults = ({
   loading,
   readError,
   didMount,
+  startTimestamp,
+  endTimestamp,
 }) => {
   const resultsHeaderRef = useRef(null)
 
@@ -84,6 +86,18 @@ const ValidationResults = ({
                 aria-live="polite"
                 aria-atomic="true"
               >
+                <span class="text-bold">
+                  Using hpt-validator version 1.10.0
+                </span>
+                <br />
+                <span className="text-bold">
+                  Validator run started at {startTimestamp}
+                </span>
+                <br />
+                <span className="text-bold">
+                  Validator run completed at {endTimestamp}
+                </span>
+                <br />
                 {valid ? (
                   <>
                     <span className="text-bold">No errors found in file</span>:{" "}
@@ -167,6 +181,7 @@ ValidationResults.propTypes = {
   loading: PropTypes.bool,
   readError: PropTypes.bool,
   didMount: PropTypes.bool,
+  timestamp: PropTypes.string,
 }
 
 export default ValidationResults
