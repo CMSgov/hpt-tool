@@ -2,12 +2,32 @@ import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import { Grid, Alert, Table } from "@trussworks/react-uswds"
 
-const createCsvString = (locationHeader, errors) =>
-  `${locationHeader},Error description\n` +
+const createDownloadableResult = (
+  filename,
+  coreVersion,
+  startTime,
+  endTime,
+  locationHeader,
   errors
-    .map(({ path, message }) => `"${path}","${message.replace(/"/gi, "")}"`)
-
-    .join("\n")
+) => {
+  const contents = [
+    `Validating file: ${filename}`,
+    `Using hpt-validator version ${coreVersion}`,
+    `Validator run started at ${startTime}`,
+    `Validator run completed at ${endTime}`,
+  ]
+  if (errors.length === 0) {
+    contents.push("No errors found")
+  } else {
+    contents.push(
+      `${locationHeader},Error description`,
+      ...errors.map(
+        ({ path, message }) => `"${path}","${message.replace(/"/gi, "")}"`
+      )
+    )
+  }
+  return contents.join("\n")
+}
 
 const ValidationResults = ({
   filename,
@@ -24,9 +44,21 @@ const ValidationResults = ({
 }) => {
   const resultsHeaderRef = useRef(null)
 
-  const blob = new Blob([createCsvString(locationHeader, errors || [])], {
-    type: "text/csv;charset=utf-8",
-  })
+  const blob = new Blob(
+    [
+      createDownloadableResult(
+        filename,
+        "1.10.0",
+        startTimestamp,
+        endTimestamp,
+        locationHeader,
+        errors || []
+      ),
+    ],
+    {
+      type: "text/csv;charset=utf-8",
+    }
+  )
   const downloadUrl = window.URL.createObjectURL(blob)
 
   const atMaxErrors = errors.length >= maxErrors
