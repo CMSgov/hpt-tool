@@ -30,9 +30,8 @@ const createDownloadableResult = (
 }
 
 const getResultDownloadName = (filename) => {
-  // trim off the extension and shorten to 170 chars
-  // this avoids problems when trying to open the file in excel
-  const shortName = filename.slice(0, filename.lastIndexOf(".")).slice(0, 170)
+  // trim off the extension and append .csv
+  const shortName = filename.slice(0, filename.lastIndexOf("."))
   return `cms-hpt-validator-results-${shortName}.csv`
 }
 
