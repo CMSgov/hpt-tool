@@ -1,23 +1,40 @@
 import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import { Grid, Alert, Table } from "@trussworks/react-uswds"
-/*
-const createCsvString = (errors, warnings) =>
-  "location,message,type\n" +
-  errors
-    .map(
-      ({ path, message }) => `"${path}","${message.replace(/"/gi, "")}","error"`
-    )
 
-    .join("\n") +
-  "\n" +
-  warnings
-    .map(
-      ({ path, message }) =>
-        `"${path}","${message.replace(/"/gi, "")}","warning"`
+const createDownloadableResult = (
+  filename,
+  coreVersion,
+  startTime,
+  endTime,
+  locationHeader,
+  errors
+) => {
+  const contents = [
+    `Validating file: ${filename}`,
+    `Using hpt-validator version ${coreVersion}`,
+    `Validator run started at ${startTime}`,
+    `Validator run completed at ${endTime}`,
+  ]
+  if (errors.length === 0) {
+    contents.push("No errors found")
+  } else {
+    contents.push(
+      `${locationHeader},Error description`,
+      ...errors.map(
+        ({ path, message }) => `"${path}","${message.replace(/"/gi, "")}"`
+      )
     )
-    .join("\n")
-*/
+  }
+  return contents.join("\n")
+}
+
+const getResultDownloadName = (filename) => {
+  // trim off the extension and append .csv
+  const shortName = filename.slice(0, filename.lastIndexOf("."))
+  return `cms-hpt-validator-results-${shortName}.csv`
+}
+
 const ValidationResults = ({
   filename,
   valid,
@@ -28,16 +45,30 @@ const ValidationResults = ({
   loading,
   readError,
   didMount,
+  startTimestamp,
+  endTimestamp,
 }) => {
   const resultsHeaderRef = useRef(null)
-  /*
-  const blob = new Blob([createCsvString(errors || [], warnings || [])], {
-    type: "text/csv;charset=utf-8",
-  })
+
+  const blob = new Blob(
+    [
+      createDownloadableResult(
+        filename,
+        "1.10.0",
+        startTimestamp,
+        endTimestamp,
+        locationHeader,
+        errors || []
+      ),
+    ],
+    {
+      type: "text/csv;charset=utf-8",
+    }
+  )
   const downloadUrl = window.URL.createObjectURL(blob)
-*/
+  const downloadName = getResultDownloadName(filename)
+
   const atMaxErrors = errors.length >= maxErrors
-  const atMaxWarnings = warnings.length >= maxErrors
 
   useEffect(() => {
     if (didMount && !loading && resultsHeaderRef.current) {
@@ -79,19 +110,33 @@ const ValidationResults = ({
           )}
           {!loading && !readError && filename && (
             <>
-              {/* <a
-                className="usa-button"
-                href={downloadUrl}
-                download="cms-hpt-validator-results.csv"
-              >
-                Download results as spreadsheet
-              </a> */}
+              {
+                <a
+                  className="usa-button"
+                  href={downloadUrl}
+                  download={downloadName}
+                >
+                  Download results as spreadsheet
+                </a>
+              }
               <h3>Errors</h3>
               <Alert
                 type={valid ? `success` : `error`}
                 aria-live="polite"
                 aria-atomic="true"
               >
+                <span class="text-bold">
+                  Using hpt-validator version 1.10.0
+                </span>
+                <br />
+                <span className="text-bold">
+                  Validator run started at {startTimestamp}
+                </span>
+                <br />
+                <span className="text-bold">
+                  Validator run completed at {endTimestamp}
+                </span>
+                <br />
                 {valid ? (
                   <>
                     <span className="text-bold">No errors found in file</span>:{" "}
@@ -175,6 +220,7 @@ ValidationResults.propTypes = {
   loading: PropTypes.bool,
   readError: PropTypes.bool,
   didMount: PropTypes.bool,
+  timestamp: PropTypes.string,
 }
 
 export default ValidationResults
