@@ -231,23 +231,27 @@ const ValidationResults = ({
                     {atMaxAlerts && (
                       <span>
                         The first {maxErrors} alerts are shown below. See the{" "}
-                        <a href="https://github.com/CMSgov/hospital-price-transparency/">
-                          Hospital Price Transparency Data Dictionary GitHub
-                          Repository
+                        <a href="https://www.cms.gov/files/document/updated-hpt-guidance-encoding-allowed-amounts.pdf">
+                          Updated Hospital Price Transparency Guidance
+                          Implementing the President's Executive Order "Making
+                          America Healthy Again by Empowering Patients with
+                          Clear, Accurate, and Actionable Healthcare Pricing
+                          Information"
                         </a>{" "}
-                        for detailed technical specifications to understand and
-                        address these alerts.
+                        to understand and address these alerts.
                       </span>
                     )}
                     {!atMaxAlerts && (
                       <span>
                         See the{" "}
-                        <a href="https://github.com/CMSgov/hospital-price-transparency/">
-                          Hospital Price Transparency Data Dictionary GitHub
-                          Repository
+                        <a href="https://www.cms.gov/files/document/updated-hpt-guidance-encoding-allowed-amounts.pdf">
+                          Updated Hospital Price Transparency Guidance
+                          Implementing the President's Executive Order "Making
+                          America Healthy Again by Empowering Patients with
+                          Clear, Accurate, and Actionable Healthcare Pricing
+                          Information"
                         </a>{" "}
-                        for detailed technical specifications to understand and
-                        address these alerts.
+                        to understand and address these alerts.
                       </span>
                     )}
                   </>
