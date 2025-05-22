@@ -35,9 +35,9 @@ const removeIndex = (array, index) => [
   ...array.slice(index + 1),
 ]
 
-const urlRegex = new RegExp(
-  /^(https?:\/\/(?:|(?!))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:\.|(?!))[a-zA-Z0-9]+\.[^\s]{2,}|\.[a-zA-Z0-9]+\.[^\s]{2,})$/
-)
+const isAllowedUrl = (url) => {
+  return validator.isURL(url, { protocols: ["http", "https"] })
+}
 
 const TxtGenerator = () => {
   const baseHospital = {
@@ -97,7 +97,7 @@ const TxtGenerator = () => {
 
     if (
       state.hospitals.some((hospital) => !!hospital.mrfUrl) &&
-      state.hospitals.some((hospital) => !hospital.mrfUrl.match(urlRegex))
+      state.hospitals.some((hospital) => !isAllowedUrl(hospital.mrfUrl))
     ) {
       return {
         type: "error",
@@ -107,9 +107,7 @@ const TxtGenerator = () => {
 
     if (
       state.hospitals.some((hospital) => !!hospital.sourcePageUrl) &&
-      state.hospitals.some(
-        (hospital) => !hospital.sourcePageUrl.match(urlRegex)
-      )
+      state.hospitals.some((hospital) => !isAllowedUrl(hospital.sourcePageUrl))
     ) {
       return {
         type: "error",
