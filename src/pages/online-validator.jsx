@@ -36,6 +36,7 @@ const OnlineValidator = () => {
       readError: false,
       errors: [],
       warnings: [],
+      alerts: [],
       startTimestamp: "",
       endTimestamp: "",
     }
@@ -52,7 +53,7 @@ const OnlineValidator = () => {
     if (["csv", "json"].includes(fileExt)) {
       try {
         const startTimestamp = new Date().toString()
-        const { valid, errors } = await (fileExt === "csv"
+        const { valid, errors, alerts } = await (fileExt === "csv"
           ? validateCsv(file, state.schemaVersion, { maxErrors: MAX_ERRORS })
           : validateJson(file, state.schemaVersion, { maxErrors: MAX_ERRORS }))
         const stateObj = {
@@ -60,6 +61,7 @@ const OnlineValidator = () => {
           valid,
           errors: errors.filter(({ warning }) => !warning),
           warnings: errors.filter(({ warning }) => warning),
+          alerts,
           loading: false,
           didMount: true,
           startTimestamp,
@@ -166,11 +168,20 @@ const OnlineValidator = () => {
                 </p>
                 <p>
                   The Online Validator reviews your uploaded MRF against the
-                  required CMS template layout and data specifications. If your
-                  MRF does not conform to the form and manner requirements, the
+                  required CMS template layout and data specifications. The
                   Online Validator will generate an output consisting of
-                  &apos;errors&apos;. The Online Validator stops reviewing an
-                  MRF if there are more than 250 errors. Additionally for CSV
+                  &apos;errors&apos; and &apos;alerts&apos;. &apos;Errors&apos;
+                  are generated if your MRF does not conform to the form and
+                  manner requirements specified in the data dictionary.
+                  &apos;Alerts&apos; are generated if your MRF contains nine 9s
+                  (999999999) in the estimated allowed amount data element,
+                  which are to be replaced with actual dollar amounts as
+                  indicated in{" "}
+                  <a href="https://www.cms.gov/files/document/updated-hpt-guidance-encoding-allowed-amounts.pdf">
+                    CMS guidance
+                  </a>{" "}
+                  issued on May 22, 2025. The Online Validator stops reviewing
+                  an MRF if there are more than 250 errors. Additionally for CSV
                   MRFs, the Online Validator stops reviewing if an error is
                   found in row 1 through 3 (i.e., errors in the general data
                   element headers, general data element values, and standard
@@ -228,6 +239,7 @@ const OnlineValidator = () => {
           valid={state.valid}
           errors={state.errors}
           warnings={state.warnings}
+          alerts={state.alerts}
           maxErrors={MAX_ERRORS}
           locationHeader={locationHeader}
           readError={state.readError}

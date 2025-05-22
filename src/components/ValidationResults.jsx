@@ -40,6 +40,7 @@ const ValidationResults = ({
   valid,
   errors,
   warnings,
+  alerts,
   maxErrors,
   locationHeader,
   loading,
@@ -69,6 +70,7 @@ const ValidationResults = ({
   const downloadName = getResultDownloadName(filename)
 
   const atMaxErrors = errors.length >= maxErrors
+  const atMaxAlerts = alerts.length >= maxErrors
 
   useEffect(() => {
     if (didMount && !loading && resultsHeaderRef.current) {
@@ -191,6 +193,77 @@ const ValidationResults = ({
                     </thead>
                     <tbody>
                       {errors
+                        .slice(0, maxErrors)
+                        .map(({ path, message }, index) => (
+                          <tr key={index}>
+                            <td>{path}</td>
+                            <td>{message}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </Table>
+                </>
+              )}
+              <h3>Alerts</h3>
+              <Alert
+                type={alerts.length === 0 ? "success" : "info"}
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                {alerts.length === 0 ? (
+                  <>
+                    <span className="text-bold">No alerts found in file</span>:{" "}
+                    <span className="text-underline">{filename}</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-bold">
+                      There
+                      {alerts.length === 1
+                        ? " is 1 alert"
+                        : ` are ${atMaxAlerts ? "at least " : ""}${
+                            alerts.length
+                          } alerts`}{" "}
+                      found in the file
+                    </span>
+                    : <span className="text-underline">{filename}</span>
+                    <br />
+                    {atMaxAlerts && (
+                      <span>
+                        The first {maxErrors} alerts are shown below. See the{" "}
+                        <a href="https://github.com/CMSgov/hospital-price-transparency/">
+                          Hospital Price Transparency Data Dictionary GitHub
+                          Repository
+                        </a>{" "}
+                        for detailed technical specifications to understand and
+                        address these alerts.
+                      </span>
+                    )}
+                    {!atMaxAlerts && (
+                      <span>
+                        See the{" "}
+                        <a href="https://github.com/CMSgov/hospital-price-transparency/">
+                          Hospital Price Transparency Data Dictionary GitHub
+                          Repository
+                        </a>{" "}
+                        for detailed technical specifications to understand and
+                        address these alerts.
+                      </span>
+                    )}
+                  </>
+                )}
+              </Alert>
+              {alerts.length > 0 && (
+                <>
+                  <Table className="width-full" bordered striped>
+                    <thead>
+                      <tr>
+                        <th scope="col">{locationHeader}</th>
+                        <th scope="col">Alert description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {alerts
                         .slice(0, maxErrors)
                         .map(({ path, message }, index) => (
                           <tr key={index}>
