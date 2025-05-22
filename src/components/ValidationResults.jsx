@@ -232,26 +232,20 @@ const ValidationResults = ({
                       <span>
                         The first {maxErrors} alerts are shown below. See the{" "}
                         <a href="https://www.cms.gov/files/document/updated-hpt-guidance-encoding-allowed-amounts.pdf">
-                          Updated Hospital Price Transparency Guidance
-                          Implementing the President's Executive Order "Making
-                          America Healthy Again by Empowering Patients with
-                          Clear, Accurate, and Actionable Healthcare Pricing
-                          Information"
+                          CMS guidance
                         </a>{" "}
-                        to understand and address these alerts.
+                        issued on May 22, 2025 to understand and address these
+                        alerts.
                       </span>
                     )}
                     {!atMaxAlerts && (
                       <span>
                         See the{" "}
                         <a href="https://www.cms.gov/files/document/updated-hpt-guidance-encoding-allowed-amounts.pdf">
-                          Updated Hospital Price Transparency Guidance
-                          Implementing the President's Executive Order "Making
-                          America Healthy Again by Empowering Patients with
-                          Clear, Accurate, and Actionable Healthcare Pricing
-                          Information"
+                          CMS guidance
                         </a>{" "}
-                        to understand and address these alerts.
+                        issued on May 22, 2025 to understand and address these
+                        alerts.
                       </span>
                     )}
                   </>
