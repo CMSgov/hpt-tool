@@ -8,7 +8,8 @@ const createDownloadableResult = (
   startTime,
   endTime,
   locationHeader,
-  errors
+  errors,
+  alerts
 ) => {
   const contents = [
     `Validating file: ${filename}`,
@@ -22,6 +23,16 @@ const createDownloadableResult = (
     contents.push(
       `${locationHeader},Error description`,
       ...errors.map(
+        ({ path, message }) => `"${path}","${message.replace(/"/gi, "")}"`
+      )
+    )
+  }
+  if (alerts.length === 0) {
+    contents.push("No alerts found")
+  } else {
+    contents.push(
+      `${locationHeader},Alert description`,
+      ...alerts.map(
         ({ path, message }) => `"${path}","${message.replace(/"/gi, "")}"`
       )
     )
@@ -50,16 +61,18 @@ const ValidationResults = ({
   endTimestamp,
 }) => {
   const resultsHeaderRef = useRef(null)
+  const coreVersion = "1.11.1"
 
   const blob = new Blob(
     [
       createDownloadableResult(
         filename,
-        "1.10.0",
+        coreVersion,
         startTimestamp,
         endTimestamp,
         locationHeader,
-        errors || []
+        errors || [],
+        alerts || []
       ),
     ],
     {
@@ -128,7 +141,7 @@ const ValidationResults = ({
                 aria-atomic="true"
               >
                 <span class="text-bold">
-                  Using hpt-validator version 1.10.0
+                  Using hpt-validator version {coreVersion}
                 </span>
                 <br />
                 <span className="text-bold">
@@ -286,6 +299,7 @@ ValidationResults.propTypes = {
   valid: PropTypes.bool,
   errors: PropTypes.arrayOf(PropTypes.object),
   warnings: PropTypes.arrayOf(PropTypes.object),
+  alerts: PropTypes.arrayOf(PropTypes.object),
   maxErrors: PropTypes.number,
   locationHeader: PropTypes.string,
   loading: PropTypes.bool,
