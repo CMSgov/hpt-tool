@@ -4,8 +4,8 @@ import {
   Label,
   Grid,
   FormGroup,
-  // Fieldset,
-  // Radio,
+  Fieldset,
+  Radio,
 } from "@trussworks/react-uswds"
 import { FileInput } from "../components/FileInput"
 import ValidationResults from "../components/ValidationResults"
@@ -14,8 +14,46 @@ import Layout from "../layouts"
 
 const MAX_ERRORS = 250
 const STORAGE_PATH = "cms-hpt-validation-results"
-
-// const SCHEMA_VERSIONS = ["v1.1", "v2.0"]
+const SCHEMA_VERSIONS = [
+  {
+    value: "v3.0",
+    label: (
+      <Label>
+        Requirements effective January 1, 2026 and enforced April 1, 2026{" "}
+        <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation">
+          (Data Dictionary v3.0)
+        </a>
+      </Label>
+    ),
+    plainLabel:
+      "Requirements effective January 1, 2026 and enforced April 1, 2026 (Data Dictionary v3.0)",
+  },
+  {
+    value: "v2.2",
+    label: (
+      <Label>
+        Requirements effective January 1, 2025{" "}
+        <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation">
+          (Archived Data Dictionary v2.2)
+        </a>
+      </Label>
+    ),
+    plainLabel: "Requirements effective January 1, 2025 (Data Dictionary v2.2)",
+  },
+  {
+    value: "v2.1",
+    label: (
+      <Label>
+        Requirements effective July 1, 2024 (
+        <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation">
+          Archived Data Dictionary v2.1
+        </a>
+        )
+      </Label>
+    ),
+    plainLabel: "Requirements effective July 1, 2024 (Data Dictionary v2.1)",
+  },
+]
 
 const getFileExtension = (filename) => {
   const splitFilename = filename.toLowerCase().split(".")
@@ -28,7 +66,8 @@ const OnlineValidator = () => {
     JSON.parse(window.sessionStorage.getItem(STORAGE_PATH)) || {
       valid: true,
       filename: "",
-      schemaVersion: "v2.0",
+      schemaVersion: SCHEMA_VERSIONS[0].value,
+      schemaLabel: SCHEMA_VERSIONS[0].plainLabel,
       fileUrl: "",
       pageUrl: "",
       loading: false,
@@ -47,6 +86,9 @@ const OnlineValidator = () => {
     const initialState = {
       filename: file.name,
       schemaVersion: state.schemaVersion,
+      schemaLabel:
+        SCHEMA_VERSIONS.find((sv) => sv.value === state.schemaVersion)
+          ?.plainLabel ?? "",
     }
     setState({ ...state, ...initialState, readError: false, loading: true })
     const fileExt = getFileExtension(file.name)
@@ -94,11 +136,31 @@ const OnlineValidator = () => {
               className="bg-white flex-align-self-start margin-bottom-4"
             >
               <form action="" method="GET">
+                <Fieldset
+                  legend={
+                    <p className="font-sans-xl text-bold">
+                      Select requirements version
+                    </p>
+                  }
+                  className="usa-form-group margin-top-0"
+                  onChange={(e) => {
+                    setState({ ...state, schemaVersion: e.target.value })
+                  }}
+                >
+                  {SCHEMA_VERSIONS.map((sv) => (
+                    <Radio
+                      key={sv.value}
+                      id={`schema-version-${sv.value}`}
+                      name="schema-version"
+                      label={sv.label}
+                      value={sv.value}
+                      defaultChecked={state.schemaVersion === sv.value}
+                    />
+                  ))}
+                </Fieldset>
                 <FormGroup>
                   <Label htmlFor="file-input">
-                    <p className="font-sans-xl text-bold margin-bottom-0">
-                      Upload file
-                    </p>
+                    <p className="font-sans-xl text-bold">Upload file</p>
                     Files must be in a required CMS template format (.json or
                     .csv)
                   </Label>
@@ -109,25 +171,6 @@ const OnlineValidator = () => {
                     onChange={validateFile}
                   />
                 </FormGroup>
-                {/* TODO: Add this back in when multiple versions are allowed in the schema */}
-                {/* <Fieldset
-                  legend={<span className="text-bold">Schema version</span>}
-                  className="usa-form-group margin-top-0"
-                  onChange={(e) => {
-                    setState({ ...state, schemaVersion: e.target.value })
-                  }}
-                >
-                  {SCHEMA_VERSIONS.map((version) => (
-                    <Radio
-                      key={version}
-                      id={`schema-version-${version}`}
-                      name="schema-version"
-                      label={version}
-                      value={version}
-                      defaultChecked={state.schemaVersion === version}
-                    />
-                  ))}
-                </Fieldset> */}
               </form>
               {state.loading && (
                 <p aria-live="polite" aria-atomic="true" className="text-bold">
@@ -151,15 +194,18 @@ const OnlineValidator = () => {
                   </strong>
                 </p>
                 <p>
-                  The V2.0 Online Validator tool assists your hospital in
-                  developing a machine- readable file (MRF) to ensure it
-                  conforms to the required form and manner requirements (45 CFR
-                  180.50(c)(2)). These form and manner requirements are
-                  described in the{" "}
+                  The Online Validator tool assists your hospital in developing
+                  a machine-readable file (MRF) to ensure it conforms to the
+                  required form and manner requirements (45 CFR 180.50(c)(2)).
+                  These form and manner requirements are described in the{" "}
                   <a href="https://www.federalregister.gov/documents/2023/11/22/2023-24293/medicare-program-hospital-outpatient-prospective-payment-and-ambulatory-surgical-center-payment">
                     CY 2024 OPPS/ASC Final Rule
+                  </a>{" "}
+                  and the{" "}
+                  <a href="https://www.federalregister.gov/public-inspection/2025-20907/medicare-program-hospital-outpatient-prospective-payment-and-ambulatory-surgical-center-payment">
+                    CY 2026 OPPS/ASC Final Rule
                   </a>
-                  , and detailed technical specifications can be found in the{" "}
+                  . The detailed technical specifications can be found in the
                   <a href="https://github.com/CMSgov/hospital-price-transparency/">
                     Hospital Price Transparency Data Dictionary GitHub
                     Repository
@@ -167,28 +213,34 @@ const OnlineValidator = () => {
                   .
                 </p>
                 <p>
-                  The Online Validator reviews your uploaded MRF against the
-                  required CMS template layout and data specifications. The
-                  Online Validator will generate an output consisting of
-                  &apos;errors&apos; and &apos;alerts&apos;. &apos;Errors&apos;
-                  are generated if your MRF does not conform to the form and
-                  manner requirements specified in the data dictionary.
-                  &apos;Alerts&apos; are generated if your MRF contains nine 9s
-                  (999999999) in the estimated allowed amount data element,
-                  which are to be replaced with actual dollar amounts as
-                  indicated in{" "}
-                  <a href="https://www.cms.gov/files/document/updated-hpt-guidance-encoding-allowed-amounts.pdf">
-                    CMS guidance
-                  </a>{" "}
-                  issued on May 22, 2025. The Online Validator stops reviewing
-                  an MRF if there are more than 250 errors. Additionally for CSV
-                  MRFs, the Online Validator stops reviewing if an error is
-                  found in row 1 through 3 (i.e., errors in the general data
-                  element headers, general data element values, and standard
-                  charges, item/service, and coding headers). You should
-                  therefore address each error displayed and run your MRF
-                  through the Online Validator repeatedly until no more errors
-                  are generated.
+                  The Online Validator includes a new capability, Version
+                  Validation, that allows the user to select which version of
+                  data dictionary to review your uploaded MRF against including
+                  past, current, and future requirements. The effective date of
+                  each data dictionary version is noted next to each option. The
+                  Online Validator defaults to the most recent data dictionary
+                  version.{" "}
+                </p>
+                <p>
+                  The Online Validator will generate an output consisting of
+                  &apos;errors&apos;, &apos;alerts&apos;, the data dictionary
+                  version, and the validator run time. &apos;Errors&apos; are
+                  generated if your MRF does not conform to the form and manner
+                  requirements of the selected data dictionary version. An alert
+                  may be generated when your MRF meets technical specifications
+                  for form and manner but may not be compliant with all
+                  requirements.
+                </p>
+                <p>
+                  The Online Validator stops reviewing an MRF if there are more
+                  than 250 errors. Additionally for CSV MRFs, the Online
+                  Validator stops reviewing if an error is found in row 1
+                  through 3 (i.e., errors in the general data element headers,
+                  general data element values, and standard charges,
+                  item/service, and coding headers). You should therefore
+                  address each error displayed and run your MRF through the
+                  Online Validator repeatedly until no more errors are
+                  generated.
                 </p>
                 <p>
                   Additionally, the Online Validator tool runs in a web browser
@@ -236,6 +288,7 @@ const OnlineValidator = () => {
       <section className="grid-container usa-section">
         <ValidationResults
           filename={state.filename}
+          schemaVersion={state.schemaVersion}
           valid={state.valid}
           errors={state.errors}
           warnings={state.warnings}
@@ -247,6 +300,7 @@ const OnlineValidator = () => {
           didMount={state.didMount}
           startTimestamp={state.startTimestamp}
           endTimestamp={state.endTimestamp}
+          schemaLabel={state.schemaLabel}
         />
       </section>
     </Layout>

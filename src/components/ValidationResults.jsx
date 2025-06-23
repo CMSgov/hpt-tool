@@ -5,6 +5,7 @@ import { Grid, Alert, Table } from "@trussworks/react-uswds"
 const createDownloadableResult = (
   filename,
   coreVersion,
+  schemaVersion,
   startTime,
   endTime,
   locationHeader,
@@ -14,6 +15,7 @@ const createDownloadableResult = (
   const contents = [
     `Validating file: ${filename}`,
     `Using hpt-validator version ${coreVersion}`,
+    `Using data dictionary version ${schemaVersion}`,
     `Validator run started at ${startTime}`,
     `Validator run completed at ${endTime}`,
   ]
@@ -48,6 +50,7 @@ const getResultDownloadName = (filename) => {
 
 const ValidationResults = ({
   filename,
+  schemaVersion,
   valid,
   errors,
   warnings,
@@ -59,6 +62,7 @@ const ValidationResults = ({
   didMount,
   startTimestamp,
   endTimestamp,
+  schemaLabel,
 }) => {
   const resultsHeaderRef = useRef(null)
   const coreVersion = "1.11.1"
@@ -68,6 +72,7 @@ const ValidationResults = ({
       createDownloadableResult(
         filename,
         coreVersion,
+        schemaVersion,
         startTimestamp,
         endTimestamp,
         locationHeader,
@@ -82,8 +87,8 @@ const ValidationResults = ({
   const downloadUrl = window.URL.createObjectURL(blob)
   const downloadName = getResultDownloadName(filename)
 
-  const atMaxErrors = errors.length >= maxErrors
-  const atMaxAlerts = alerts.length >= maxErrors
+  const atMaxErrors = (errors || []).length >= maxErrors
+  const atMaxAlerts = (alerts || []).length >= maxErrors
 
   useEffect(() => {
     if (didMount && !loading && resultsHeaderRef.current) {
@@ -142,6 +147,12 @@ const ValidationResults = ({
               >
                 <span class="text-bold">
                   Using hpt-validator version {coreVersion}
+                </span>
+                <br />
+                <span class="text-bold">
+                  {/* Using data dictionary version {schemaVersion} */}
+                  {/* change this to refer to implementation date */}
+                  Using requirements version: {schemaLabel}
                 </span>
                 <br />
                 <span className="text-bold">
@@ -296,6 +307,7 @@ const ValidationResults = ({
 
 ValidationResults.propTypes = {
   filename: PropTypes.string,
+  schemaVersion: PropTypes.string,
   valid: PropTypes.bool,
   errors: PropTypes.arrayOf(PropTypes.object),
   warnings: PropTypes.arrayOf(PropTypes.object),
