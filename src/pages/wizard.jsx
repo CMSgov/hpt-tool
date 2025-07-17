@@ -12,7 +12,7 @@ import {
   TextInput,
   FormGroup,
 } from "@trussworks/react-uswds"
-import { validateFilename } from "hpt-validator"
+import { validateFilename } from "@cmsgov/hpt-validator"
 import Layout from "../layouts"
 
 const STORAGE_PATH = "cms-hpt-file-name-wizard"
