@@ -56,5 +56,8 @@
     "singleQuote": false,
     "tabWidth": 2,
     "trailingComma": "es5"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "*"
   }
 }
