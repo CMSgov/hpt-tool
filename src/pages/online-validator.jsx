@@ -19,10 +19,15 @@ const SCHEMA_VERSIONS = [
     value: "v3.0",
     label: (
       <Label>
-        Requirements effective January 1, 2026 and enforced April 1, 2026{" "}
-        <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation">
-          (Data Dictionary v3.0)
+        Requirements effective January 1, 2026 and enforced April 1, 2026 (Data
+        Dictionary v3.0{" "}
+        <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/CSV">
+          CSV
+        </a>{" "}
+        <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/JSON">
+          JSON
         </a>
+        )
       </Label>
     ),
     plainLabel:
@@ -32,10 +37,14 @@ const SCHEMA_VERSIONS = [
     value: "v2.2",
     label: (
       <Label>
-        Requirements effective January 1, 2025{" "}
-        <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation">
-          (Archived Data Dictionary v2.2)
+        Requirements effective January 1, 2025 (Archived Data Dictionary v2.2{" "}
+        <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.2_README.md">
+          CSV
+        </a>{" "}
+        <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/JSON/v2.2_README.md">
+          JSON
         </a>
+        )
       </Label>
     ),
     plainLabel: "Requirements effective January 1, 2025 (Data Dictionary v2.2)",
@@ -44,9 +53,12 @@ const SCHEMA_VERSIONS = [
     value: "v2.1",
     label: (
       <Label>
-        Requirements effective July 1, 2024 (
-        <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation">
-          Archived Data Dictionary v2.1
+        Requirements effective July 1, 2024 ( Archived Data Dictionary v2.1{" "}
+        <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.1_README.md">
+          CSV
+        </a>{" "}
+        <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/JSON/v2.1_README.md">
+          JSON
         </a>
         )
       </Label>
