@@ -65,7 +65,7 @@ const ValidationResults = ({
   schemaLabel,
 }) => {
   const resultsHeaderRef = useRef(null)
-  const coreVersion = "2.1.3"
+  const coreVersion = "2.2.0"
 
   const blob = new Blob(
     [
