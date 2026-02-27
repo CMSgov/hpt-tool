@@ -146,13 +146,8 @@ const ValidationResults = ({
                 aria-atomic="true"
               >
                 <span class="text-bold">
-                  Using hpt-validator version {coreVersion}
-                </span>
-                <br />
-                <span class="text-bold">
-                  {/* Using data dictionary version {schemaVersion} */}
-                  {/* change this to refer to implementation date */}
-                  Using requirements version: {schemaLabel}
+                  Requirements version: Requirements effective January 1, 2026
+                  and enforced April 1, 2026 ({schemaLabel})
                 </span>
                 <br />
                 <span className="text-bold">
