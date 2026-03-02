@@ -19,8 +19,7 @@ const SCHEMA_VERSIONS = [
     value: "v3.0",
     label: (
       <Label>
-        Requirements effective January 1, 2026 and enforced April 1, 2026 (Data
-        Dictionary v3.0{" "}
+        Data Dictionary v3.0 (
         <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/CSV">
           CSV
         </a>{" "}
@@ -30,14 +29,14 @@ const SCHEMA_VERSIONS = [
         )
       </Label>
     ),
-    plainLabel:
-      "Requirements effective January 1, 2026 and enforced April 1, 2026 (Data Dictionary v3.0)",
+    plainLabel: "Data Dictionary v3.0",
+    effectiveDateLabel: "January 1, 2026 and enforced April 1, 2026",
   },
   {
     value: "v2.2",
     label: (
       <Label>
-        Requirements effective January 1, 2025 (Archived Data Dictionary v2.2{" "}
+        Archived Data Dictionary v2.2 (
         <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.2_README.md">
           CSV
         </a>{" "}
@@ -47,13 +46,14 @@ const SCHEMA_VERSIONS = [
         )
       </Label>
     ),
-    plainLabel: "Requirements effective January 1, 2025 (Data Dictionary v2.2)",
+    plainLabel: "Data Dictionary v2.2",
+    effectiveDateLabel: "January 1, 2025",
   },
   {
     value: "v2.1",
     label: (
       <Label>
-        Requirements effective July 1, 2024 ( Archived Data Dictionary v2.1{" "}
+        Archived Data Dictionary v2.1 (
         <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.1_README.md">
           CSV
         </a>{" "}
@@ -63,7 +63,8 @@ const SCHEMA_VERSIONS = [
         )
       </Label>
     ),
-    plainLabel: "Requirements effective July 1, 2024 (Data Dictionary v2.1)",
+    plainLabel: "Data Dictionary v2.1",
+    effectiveDateLabel: "July 1, 2024",
   },
 ]
 
@@ -80,6 +81,7 @@ const OnlineValidator = () => {
       filename: "",
       schemaVersion: SCHEMA_VERSIONS[0].value,
       schemaLabel: SCHEMA_VERSIONS[0].plainLabel,
+      schemaDateLabel: SCHEMA_VERSIONS[0].effectiveDateLabel,
       fileUrl: "",
       pageUrl: "",
       loading: false,
@@ -101,6 +103,9 @@ const OnlineValidator = () => {
       schemaLabel:
         SCHEMA_VERSIONS.find((sv) => sv.value === state.schemaVersion)
           ?.plainLabel ?? "",
+      schemaDateLabel:
+        SCHEMA_VERSIONS.find((sv) => sv.value === state.schemaVersion)
+          ?.effectiveDateLabel ?? "",
     }
     setState({ ...state, ...initialState, readError: false, loading: true })
     const fileExt = getFileExtension(file.name)
@@ -156,19 +161,48 @@ const OnlineValidator = () => {
                   }
                   className="usa-form-group margin-top-0"
                   onChange={(e) => {
-                    setState({ ...state, schemaVersion: e.target.value })
+                    setState({
+                      ...state,
+                      schemaVersion: e.target.value,
+                      schemaDateLabel: e.target.effectiveDate,
+                    })
                   }}
                 >
-                  {SCHEMA_VERSIONS.map((sv) => (
-                    <Radio
-                      key={sv.value}
-                      id={`schema-version-${sv.value}`}
-                      name="schema-version"
-                      label={sv.label}
-                      value={sv.value}
-                      defaultChecked={state.schemaVersion === sv.value}
-                    />
-                  ))}
+                  {/* Group 1: Current Requirements */}
+                  <p className="font-sans-md text-bold margin-top-2 margin-bottom-1">
+                    Current Requirements
+                  </p>
+                  {SCHEMA_VERSIONS.filter((sv) => sv.value === "v3.0").map(
+                    (sv) => (
+                      <Radio
+                        key={sv.value}
+                        id={`schema-version-${sv.value}`}
+                        name="schema-version"
+                        label={sv.label}
+                        value={sv.value}
+                        defaultChecked={state.schemaVersion === sv.value}
+                        effectiveDate={sv.effectiveDateLabel}
+                      />
+                    )
+                  )}
+
+                  {/* Group 2: Past Requirements */}
+                  <p className="font-sans-md text-bold margin-top-3 margin-bottom-1">
+                    Past Requirements
+                  </p>
+                  {SCHEMA_VERSIONS.filter((sv) => sv.value !== "v3.0").map(
+                    (sv) => (
+                      <Radio
+                        key={sv.value}
+                        id={`schema-version-${sv.value}`}
+                        name="schema-version"
+                        label={sv.label}
+                        value={sv.value}
+                        defaultChecked={state.schemaVersion === sv.value}
+                        effectiveDate={sv.effectiveDateLabel}
+                      />
+                    )
+                  )}
                 </Fieldset>
                 <FormGroup>
                   <Label htmlFor="file-input">
@@ -217,7 +251,7 @@ const OnlineValidator = () => {
                   <a href="https://www.federalregister.gov/public-inspection/2025-20907/medicare-program-hospital-outpatient-prospective-payment-and-ambulatory-surgical-center-payment">
                     CY 2026 OPPS/ASC Final Rule
                   </a>
-                  . The detailed technical specifications can be found in the
+                  . The detailed technical specifications can be found in the{" "}
                   <a href="https://github.com/CMSgov/hospital-price-transparency/">
                     Hospital Price Transparency Data Dictionary GitHub
                     Repository
@@ -228,10 +262,44 @@ const OnlineValidator = () => {
                   The Online Validator includes a new capability, Version
                   Validation, that allows the user to select which version of
                   data dictionary to review your uploaded MRF against including
-                  past, current, and future requirements. The effective date of
-                  each data dictionary version is noted next to each option. The
-                  Online Validator defaults to the most recent data dictionary
-                  version.{" "}
+                  past, current, and future requirements. The Online Validator
+                  defaults to the most recent data dictionary version and
+                  includes the following options:{" "}
+                  <ul>
+                    <li>
+                      <strong>Data Dictionary v3.0 - </strong>Requirements
+                      effective January 1, 2026 and enforced April 1, 2026 (
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/CSV">
+                        CSV
+                      </a>{" "}
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/JSON">
+                        JSON
+                      </a>
+                      )
+                    </li>
+                    <li>
+                      <strong>Data Dictionary v2.2 - </strong>Requirements
+                      effective January 1, 2025 (
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.2_README.md">
+                        CSV
+                      </a>{" "}
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/JSON/v2.2_README.md">
+                        JSON
+                      </a>
+                      )
+                    </li>
+                    <li>
+                      <strong>Data Dictionary v2.1 - </strong>Requirements
+                      effective July 1, 2024 (
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.1_README.md">
+                        CSV
+                      </a>{" "}
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/JSON/v2.1_README.md">
+                        JSON
+                      </a>
+                      )
+                    </li>
+                  </ul>
                 </p>
                 <p>
                   The Online Validator will generate an output consisting of
@@ -313,6 +381,7 @@ const OnlineValidator = () => {
           startTimestamp={state.startTimestamp}
           endTimestamp={state.endTimestamp}
           schemaLabel={state.schemaLabel}
+          schemaDateLabel={state.schemaDateLabel}
         />
       </section>
     </Layout>
