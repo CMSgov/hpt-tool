@@ -63,6 +63,7 @@ const ValidationResults = ({
   startTimestamp,
   endTimestamp,
   schemaLabel,
+  schemaDateLabel,
 }) => {
   const resultsHeaderRef = useRef(null)
   const coreVersion = "2.2.0"
@@ -146,8 +147,8 @@ const ValidationResults = ({
                 aria-atomic="true"
               >
                 <span class="text-bold">
-                  Requirements version: Requirements effective January 1, 2026
-                  and enforced April 1, 2026 ({schemaLabel})
+                  Requirements version: Requirements effective {schemaDateLabel}{" "}
+                  ({schemaLabel})
                 </span>
                 <br />
                 <span className="text-bold">

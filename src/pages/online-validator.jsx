@@ -30,6 +30,7 @@ const SCHEMA_VERSIONS = [
       </Label>
     ),
     plainLabel: "Data Dictionary v3.0",
+    effectiveDateLabel: "January 1, 2026 and enforced April 1, 2026",
   },
   {
     value: "v2.2",
@@ -46,6 +47,7 @@ const SCHEMA_VERSIONS = [
       </Label>
     ),
     plainLabel: "Data Dictionary v2.2",
+    effectiveDateLabel: "January 1, 2025",
   },
   {
     value: "v2.1",
@@ -62,6 +64,7 @@ const SCHEMA_VERSIONS = [
       </Label>
     ),
     plainLabel: "Data Dictionary v2.1",
+    effectiveDateLabel: "July 1, 2024",
   },
 ]
 
@@ -78,6 +81,7 @@ const OnlineValidator = () => {
       filename: "",
       schemaVersion: SCHEMA_VERSIONS[0].value,
       schemaLabel: SCHEMA_VERSIONS[0].plainLabel,
+      schemaDateLabel: SCHEMA_VERSIONS[0].effectiveDateLabel,
       fileUrl: "",
       pageUrl: "",
       loading: false,
@@ -99,6 +103,9 @@ const OnlineValidator = () => {
       schemaLabel:
         SCHEMA_VERSIONS.find((sv) => sv.value === state.schemaVersion)
           ?.plainLabel ?? "",
+      schemaDateLabel:
+        SCHEMA_VERSIONS.find((sv) => sv.value === state.schemaVersion)
+          ?.effectiveDateLabel ?? "",
     }
     setState({ ...state, ...initialState, readError: false, loading: true })
     const fileExt = getFileExtension(file.name)
@@ -154,7 +161,11 @@ const OnlineValidator = () => {
                   }
                   className="usa-form-group margin-top-0"
                   onChange={(e) => {
-                    setState({ ...state, schemaVersion: e.target.value })
+                    setState({
+                      ...state,
+                      schemaVersion: e.target.value,
+                      schemaDateLabel: e.target.effectiveDate,
+                    })
                   }}
                 >
                   {/* Group 1: Current Requirements */}
@@ -170,6 +181,7 @@ const OnlineValidator = () => {
                         label={sv.label}
                         value={sv.value}
                         defaultChecked={state.schemaVersion === sv.value}
+                        effectiveDate={sv.effectiveDateLabel}
                       />
                     )
                   )}
@@ -187,6 +199,7 @@ const OnlineValidator = () => {
                         label={sv.label}
                         value={sv.value}
                         defaultChecked={state.schemaVersion === sv.value}
+                        effectiveDate={sv.effectiveDateLabel}
                       />
                     )
                   )}
@@ -368,6 +381,7 @@ const OnlineValidator = () => {
           startTimestamp={state.startTimestamp}
           endTimestamp={state.endTimestamp}
           schemaLabel={state.schemaLabel}
+          schemaDateLabel={state.schemaDateLabel}
         />
       </section>
     </Layout>
