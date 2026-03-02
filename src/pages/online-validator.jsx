@@ -249,10 +249,44 @@ const OnlineValidator = () => {
                   The Online Validator includes a new capability, Version
                   Validation, that allows the user to select which version of
                   data dictionary to review your uploaded MRF against including
-                  past, current, and future requirements. The effective date of
-                  each data dictionary version is noted next to each option. The
-                  Online Validator defaults to the most recent data dictionary
-                  version.{" "}
+                  past, current, and future requirements. The Online Validator
+                  defaults to the most recent data dictionary version and
+                  includes the following options:{" "}
+                  <ul>
+                    <li>
+                      <strong>Data Dictionary v3.0 - </strong>Requirements
+                      effective January 1, 2026 and enforced April 1, 2026 (
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/CSV">
+                        CSV
+                      </a>{" "}
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/JSON">
+                        JSON
+                      </a>
+                      )
+                    </li>
+                    <li>
+                      <strong>Data Dictionary v2.2 - </strong>Requirements
+                      effective January 1, 2025 (
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.2_README.md">
+                        CSV
+                      </a>{" "}
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/JSON/v2.2_README.md">
+                        JSON
+                      </a>
+                      )
+                    </li>
+                    <li>
+                      <strong>Data Dictionary v2.1 - </strong>Requirements
+                      effective July 1, 2024 (
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.1_README.md">
+                        CSV
+                      </a>{" "}
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/JSON/v2.1_README.md">
+                        JSON
+                      </a>
+                      )
+                    </li>
+                  </ul>
                 </p>
                 <p>
                   The Online Validator will generate an output consisting of
