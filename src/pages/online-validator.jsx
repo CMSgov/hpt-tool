@@ -243,7 +243,7 @@ const OnlineValidator = () => {
                   The Online Validator tool assists your hospital in developing
                   a machine-readable file (MRF) to ensure it conforms to the
                   required form and manner requirements (45 CFR 180.50(c)(2)).
-                  These form and manner requirements are described in the{" "}
+                  These form and manner requirements are described in the {" "}
                   <a href="https://www.federalregister.gov/documents/2023/11/22/2023-24293/medicare-program-hospital-outpatient-prospective-payment-and-ambulatory-surgical-center-payment">
                     CY 2024 OPPS/ASC Final Rule
                   </a>{" "}
