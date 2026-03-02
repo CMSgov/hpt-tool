@@ -243,7 +243,7 @@ const OnlineValidator = () => {
                   The Online Validator tool assists your hospital in developing
                   a machine-readable file (MRF) to ensure it conforms to the
                   required form and manner requirements (45 CFR 180.50(c)(2)).
-                  These form and manner requirements are described in the {" "}
+                  These form and manner requirements are described in the{" "}
                   <a href="https://www.federalregister.gov/documents/2023/11/22/2023-24293/medicare-program-hospital-outpatient-prospective-payment-and-ambulatory-surgical-center-payment">
                     CY 2024 OPPS/ASC Final Rule
                   </a>{" "}
@@ -251,7 +251,7 @@ const OnlineValidator = () => {
                   <a href="https://www.federalregister.gov/public-inspection/2025-20907/medicare-program-hospital-outpatient-prospective-payment-and-ambulatory-surgical-center-payment">
                     CY 2026 OPPS/ASC Final Rule
                   </a>
-                  . The detailed technical specifications can be found in the
+                  . The detailed technical specifications can be found in the{" "}
                   <a href="https://github.com/CMSgov/hospital-price-transparency/">
                     Hospital Price Transparency Data Dictionary GitHub
                     Repository
