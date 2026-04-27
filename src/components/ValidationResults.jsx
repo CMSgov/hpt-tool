@@ -4,7 +4,6 @@ import { Grid, Alert, Table } from "@trussworks/react-uswds"
 
 const createDownloadableResult = (
   filename,
-  coreVersion,
   schemaVersion,
   startTime,
   endTime,
@@ -14,7 +13,6 @@ const createDownloadableResult = (
 ) => {
   const contents = [
     `Validating file: ${filename}`,
-    `Using hpt-validator version ${coreVersion}`,
     `Using data dictionary version ${schemaVersion}`,
     `Validator run started at ${startTime}`,
     `Validator run completed at ${endTime}`,
@@ -66,13 +64,11 @@ const ValidationResults = ({
   schemaDateLabel,
 }) => {
   const resultsHeaderRef = useRef(null)
-  const coreVersion = "2.2.0"
 
   const blob = new Blob(
     [
       createDownloadableResult(
         filename,
-        coreVersion,
         schemaVersion,
         startTimestamp,
         endTimestamp,
