@@ -33,7 +33,6 @@
     "esm": "^3.2.25",
     "jsdom": "^25.0.1",
     "prettier": "^3.3.3",
-    "prettier-eslint": "^16.3.0",
     "vite": "^6.2.4",
     "vitest": "^3.1.1"
   },

@@ -86,6 +86,10 @@ const ValidationResults = ({
 
   const atMaxErrors = (errors || []).length >= maxErrors
   const atMaxAlerts = (alerts || []).length >= maxErrors
+  // slightly awkward, but we don't have type info for JSON alerts
+  const showNineNinesGuidance = (alerts || []).some((alert) =>
+    alert.message.startsWith("Nine 9s used for")
+  )
 
   useEffect(() => {
     if (didMount && !loading && resultsHeaderRef.current) {
@@ -246,22 +250,27 @@ const ValidationResults = ({
                     <br />
                     {atMaxAlerts && (
                       <span>
-                        The first {maxErrors} alerts are shown below. See the{" "}
-                        <a href="https://www.cms.gov/files/document/updated-hpt-guidance-encoding-allowed-amounts.pdf">
-                          CMS guidance
-                        </a>{" "}
-                        issued on May 22, 2025 to understand and address these
-                        alerts.
+                        The first {maxErrors} alerts are shown below.{" "}
+                        {showNineNinesGuidance && (
+                          <>
+                            See the{" "}
+                            <a href="https://www.cms.gov/files/document/updated-hpt-guidance-encoding-allowed-amounts.pdf">
+                              CMS guidance
+                            </a>{" "}
+                            issued on May 22, 2025 to understand and address the
+                            nine 9 alerts.
+                          </>
+                        )}
                       </span>
                     )}
-                    {!atMaxAlerts && (
+                    {!atMaxAlerts && showNineNinesGuidance && (
                       <span>
                         See the{" "}
                         <a href="https://www.cms.gov/files/document/updated-hpt-guidance-encoding-allowed-amounts.pdf">
                           CMS guidance
                         </a>{" "}
-                        issued on May 22, 2025 to understand and address these
-                        alerts.
+                        issued on May 22, 2025 to understand and address the
+                        nine 9 alerts.
                       </span>
                     )}
                   </>
