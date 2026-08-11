@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import { Grid, Alert, Table } from "@trussworks/react-uswds"
+import { getFileExtension } from "../utils"
 
 const createDownloadableResult = (
   filename,
@@ -46,6 +47,33 @@ const getResultDownloadName = (filename) => {
   return `cms-hpt-validator-results-${shortName}.csv`
 }
 
+const getDataDictionaryUrl = (filename, schemaVersion) => {
+  const extension = getFileExtension(filename)
+  if (extension === "csv") {
+    if (schemaVersion === "v2.1") {
+      return "https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.1_README.md"
+    } else if (schemaVersion === "v2.2") {
+      return "https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.2_README.md"
+    } else if (schemaVersion === "v3.0") {
+      return "https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/CSV"
+    } else {
+      return "https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/CSV"
+    }
+  } else if (extension === "json") {
+    if (schemaVersion === "v2.1") {
+      return "https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/JSON/v2.1_README.md"
+    } else if (schemaVersion === "v2.2") {
+      return "https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/JSON/v2.2_README.md"
+    } else if (schemaVersion === "v3.0") {
+      return "https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/JSON"
+    } else {
+      return "https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/JSON"
+    }
+  } else {
+    return "https://github.com/CMSgov/hospital-price-transparency/"
+  }
+}
+
 const ValidationResults = ({
   filename,
   schemaVersion,
@@ -83,6 +111,7 @@ const ValidationResults = ({
   )
   const downloadUrl = window.URL.createObjectURL(blob)
   const downloadName = getResultDownloadName(filename)
+  const dataDictionaryUrl = getDataDictionaryUrl(filename, schemaVersion)
 
   const atMaxErrors = (errors || []).length >= maxErrors
   const atMaxAlerts = (alerts || []).length >= maxErrors
@@ -146,27 +175,23 @@ const ValidationResults = ({
                 aria-live="polite"
                 aria-atomic="true"
               >
-                <span class="text-bold">
+                <span>
                   Requirements version: Requirements effective {schemaDateLabel}{" "}
                   ({schemaLabel})
                 </span>
                 <br />
-                <span className="text-bold">
-                  Validator run started at {startTimestamp}
-                </span>
+                <span>Validator run started at {startTimestamp}</span>
                 <br />
-                <span className="text-bold">
-                  Validator run completed at {endTimestamp}
-                </span>
+                <span>Validator run completed at {endTimestamp}</span>
                 <br />
                 {valid ? (
                   <>
-                    <span className="text-bold">No errors found in file</span>:{" "}
+                    <span>No errors found in file</span>:{" "}
                     <span className="text-underline">{filename}</span>
                   </>
                 ) : (
                   <>
-                    <span className="text-bold">
+                    <span>
                       There
                       {errors.length === 1
                         ? " is 1 error"
@@ -178,9 +203,9 @@ const ValidationResults = ({
                     : <span className="text-underline">{filename}</span>
                     <br />
                     {atMaxErrors && (
-                      <span>
+                      <span class="text-bold">
                         The first {maxErrors} errors are shown below. See the{" "}
-                        <a href="https://github.com/CMSgov/hospital-price-transparency/">
+                        <a href={dataDictionaryUrl}>
                           Hospital Price Transparency Data Dictionary GitHub
                           Repository
                         </a>{" "}
@@ -189,9 +214,9 @@ const ValidationResults = ({
                       </span>
                     )}
                     {!atMaxErrors && (
-                      <span>
+                      <span class="text-bold">
                         See the{" "}
-                        <a href="https://github.com/CMSgov/hospital-price-transparency/">
+                        <a href={dataDictionaryUrl}>
                           Hospital Price Transparency Data Dictionary GitHub
                           Repository
                         </a>{" "}
@@ -232,12 +257,12 @@ const ValidationResults = ({
               >
                 {alerts.length === 0 ? (
                   <>
-                    <span className="text-bold">No alerts found in file</span>:{" "}
+                    <span>No alerts found in file</span>:{" "}
                     <span className="text-underline">{filename}</span>
                   </>
                 ) : (
                   <>
-                    <span className="text-bold">
+                    <span>
                       There
                       {alerts.length === 1
                         ? " is 1 alert"
@@ -249,7 +274,7 @@ const ValidationResults = ({
                     : <span className="text-underline">{filename}</span>
                     <br />
                     {atMaxAlerts && (
-                      <span>
+                      <span class="text-bold">
                         The first {maxErrors} alerts are shown below.{" "}
                         {showNineNinesGuidance && (
                           <>
@@ -264,7 +289,7 @@ const ValidationResults = ({
                       </span>
                     )}
                     {!atMaxAlerts && showNineNinesGuidance && (
-                      <span>
+                      <span class="text-bold">
                         See the{" "}
                         <a href="https://www.cms.gov/files/document/updated-hpt-guidance-encoding-allowed-amounts.pdf">
                           CMS guidance
