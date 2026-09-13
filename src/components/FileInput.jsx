@@ -5,6 +5,24 @@ import classnames from "classnames"
 const SPACER_GIF =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
 
+// Match an extension the way the validator downstream does: against the final
+// segment of the name, case-insensitively. indexOf() looked for the token
+// anywhere in the name, so "standardcharges.csv.txt" was accepted as a CSV,
+// and it was case-sensitive, so "STANDARDCHARGES.CSV" was rejected.
+const isExtensionMatch = (filename, fileType) =>
+  fileType.startsWith(".") &&
+  filename.toLowerCase().endsWith(fileType.toLowerCase())
+
+// Whether a file satisfies one of the entries in an `accept` list.
+export const isFileAccepted = (file, accept) =>
+  accept
+    .split(",")
+    .some(
+      (fileType) =>
+        isExtensionMatch(file.name, fileType) ||
+        file.type.includes(fileType.replace(/\*/g, ""))
+    )
+
 export const FileInput = ({
   name,
   id,
@@ -52,19 +70,11 @@ export const FileInput = ({
     setShowError(false)
 
     if (accept) {
-      const acceptedTypes = accept.split(",")
       let allFilesAllowed = true
       for (let i = 0; i < e.target.files.length; i += 1) {
         const file = e.target.files[parseInt(`${i}`)]
-        if (allFilesAllowed) {
-          for (let j = 0; j < acceptedTypes.length; j += 1) {
-            const fileType = acceptedTypes[parseInt(`${j}`)]
-            allFilesAllowed =
-              file.name.indexOf(fileType) > 0 ||
-              file.type.includes(fileType.replace(/\*/g, ""))
-            if (allFilesAllowed) break
-          }
-        } else break
+        allFilesAllowed = isFileAccepted(file, accept)
+        if (!allFilesAllowed) break
       }
 
       if (!allFilesAllowed) {

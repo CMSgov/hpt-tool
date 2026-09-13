@@ -68,7 +68,7 @@ const SCHEMA_VERSIONS = [
   },
 ]
 
-const getFileExtension = (filename) => {
+export const getFileExtension = (filename) => {
   const splitFilename = filename.toLowerCase().split(".")
   if (splitFilename.length < 1) return null
   return splitFilename.slice(-1)[0]
@@ -137,6 +137,16 @@ const OnlineValidator = () => {
           readError: true,
         })
       }
+    } else {
+      // The picker should have rejected anything we cannot validate, but if the
+      // two ever disagree again, report it rather than leaving the results panel
+      // telling the user their file is still processing.
+      setState({
+        ...initialState,
+        loading: false,
+        didMount: true,
+        readError: true,
+      })
     }
   }
 
