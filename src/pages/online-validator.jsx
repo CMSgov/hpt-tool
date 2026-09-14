@@ -11,6 +11,7 @@ import { FileInput } from "../components/FileInput"
 import ValidationResults from "../components/ValidationResults"
 import { validateCsv, validateJson } from "@cmsgov/hpt-validator"
 import Layout from "../layouts"
+import { getFileExtension } from "../utils"
 
 const MAX_ERRORS = 250
 const STORAGE_PATH = "cms-hpt-validation-results"
@@ -67,12 +68,6 @@ const SCHEMA_VERSIONS = [
     effectiveDateLabel: "July 1, 2024",
   },
 ]
-
-const getFileExtension = (filename) => {
-  const splitFilename = filename.toLowerCase().split(".")
-  if (splitFilename.length < 1) return null
-  return splitFilename.slice(-1)[0]
-}
 
 const OnlineValidator = () => {
   const [state, setState] = useState(
