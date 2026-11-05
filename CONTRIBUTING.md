@@ -53,6 +53,14 @@ See a bug or have a suggestion for a feature? File an issue, filling out the ite
 
 Generally pull requests should link to existing issues, but if you have a small change feel free to submit it without creating an issue in advance.
 
+### AI Usage
+
+If you use AI tools to generate code that is included as part of a pull request, you must disclose the use of these tools when creating the pull request. Include the following text in the pull request description:
+
+```
+This pull request includes AI-generated code.
+```
+
 ## Documentation
 
 We welcome improvements to the project documentation or to the existing
