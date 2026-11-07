@@ -132,6 +132,17 @@ const OnlineValidator = () => {
           readError: true,
         })
       }
+    } else {
+      // the file picker accepts on a substring of the name, so a file like
+      // standardcharges.csv.txt gets this far. without this branch loading stays
+      // true and the page shows "your file is processing" for good.
+      setState({
+        ...state,
+        ...initialState,
+        loading: false,
+        didMount: true,
+        readError: true,
+      })
     }
   }
 
