@@ -51,23 +51,23 @@ const getDataDictionaryUrl = (filename, schemaVersion) => {
   const extension = getFileExtension(filename)
   if (extension === "csv") {
     if (schemaVersion === "v2.1") {
-      return "https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.1_README.md"
+      return "https://github.com/CMSgov/hospital-price-transparency/blob/master/Machine-readable%20file/archive/documentation/CSV/v2.1_README.md"
     } else if (schemaVersion === "v2.2") {
-      return "https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.2_README.md"
+      return "https://github.com/CMSgov/hospital-price-transparency/blob/master/Machine-readable%20file/archive/documentation/CSV/v2.2_README.md"
     } else if (schemaVersion === "v3.0") {
-      return "https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/CSV"
+      return "https://github.com/CMSgov/hospital-price-transparency/tree/master/Machine-readable%20file/documentation/CSV"
     } else {
-      return "https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/CSV"
+      return "https://github.com/CMSgov/hospital-price-transparency/tree/master/Machine-readable%20file/documentation/CSV"
     }
   } else if (extension === "json") {
     if (schemaVersion === "v2.1") {
-      return "https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/JSON/v2.1_README.md"
+      return "https://github.com/CMSgov/hospital-price-transparency/blob/master/Machine-readable%20file/archive/documentation/JSON/v2.1_README.md"
     } else if (schemaVersion === "v2.2") {
-      return "https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/JSON/v2.2_README.md"
+      return "https://github.com/CMSgov/hospital-price-transparency/blob/master/Machine-readable%20file/archive/documentation/JSON/v2.2_README.md"
     } else if (schemaVersion === "v3.0") {
-      return "https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/JSON"
+      return "https://github.com/CMSgov/hospital-price-transparency/tree/master/Machine-readable%20file/documentation/JSON"
     } else {
-      return "https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/JSON"
+      return "https://github.com/CMSgov/hospital-price-transparency/tree/master/Machine-readable%20file/documentation/JSON"
     }
   } else {
     return "https://github.com/CMSgov/hospital-price-transparency/"

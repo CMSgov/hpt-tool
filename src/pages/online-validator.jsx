@@ -21,10 +21,10 @@ const SCHEMA_VERSIONS = [
     label: (
       <Label>
         Data Dictionary v3.0 (
-        <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/CSV">
+        <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/Machine-readable%20file/documentation/CSV">
           CSV
         </a>{" "}
-        <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/JSON">
+        <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/Machine-readable%20file/documentation/JSON">
           JSON
         </a>
         )
@@ -38,10 +38,10 @@ const SCHEMA_VERSIONS = [
     label: (
       <Label>
         Archived Data Dictionary v2.2 (
-        <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.2_README.md">
+        <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/Machine-readable%20file/archive/documentation/CSV/v2.2_README.md">
           CSV
         </a>{" "}
-        <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/JSON/v2.2_README.md">
+        <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/Machine-readable%20file/archive/documentation/JSON/v2.2_README.md">
           JSON
         </a>
         )
@@ -55,10 +55,10 @@ const SCHEMA_VERSIONS = [
     label: (
       <Label>
         Archived Data Dictionary v2.1 (
-        <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.1_README.md">
+        <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/Machine-readable%20file/archive/documentation/CSV/v2.1_README.md">
           CSV
         </a>{" "}
-        <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/JSON/v2.1_README.md">
+        <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/Machine-readable%20file/archive/documentation/JSON/v2.1_README.md">
           JSON
         </a>
         )
@@ -264,10 +264,10 @@ const OnlineValidator = () => {
                     <li>
                       <strong>Data Dictionary v3.0 - </strong>Requirements
                       effective January 1, 2026 and enforced April 1, 2026 (
-                      <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/CSV">
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/Machine-readable%20file/documentation/CSV">
                         CSV
                       </a>{" "}
-                      <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/documentation/JSON">
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/tree/master/Machine-readable%20file/documentation/JSON">
                         JSON
                       </a>
                       )
@@ -275,10 +275,10 @@ const OnlineValidator = () => {
                     <li>
                       <strong>Data Dictionary v2.2 - </strong>Requirements
                       effective January 1, 2025 (
-                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.2_README.md">
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/Machine-readable%20file/archive/documentation/CSV/v2.2_README.md">
                         CSV
                       </a>{" "}
-                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/JSON/v2.2_README.md">
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/Machine-readable%20file/archive/documentation/JSON/v2.2_README.md">
                         JSON
                       </a>
                       )
@@ -286,10 +286,10 @@ const OnlineValidator = () => {
                     <li>
                       <strong>Data Dictionary v2.1 - </strong>Requirements
                       effective July 1, 2024 (
-                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/CSV/v2.1_README.md">
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/Machine-readable%20file/archive/documentation/CSV/v2.1_README.md">
                         CSV
                       </a>{" "}
-                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/archive/documentation/JSON/v2.1_README.md">
+                      <a href="https://github.com/CMSgov/hospital-price-transparency/blob/master/Machine-readable%20file/archive/documentation/JSON/v2.1_README.md">
                         JSON
                       </a>
                       )
