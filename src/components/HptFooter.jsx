@@ -15,7 +15,7 @@ const HptFooter = () => {
                 <a
                   key="about"
                   className="usa-footer__primary-link"
-                  href="https://www.cms.gov/hospital-price-transparency"
+                  href="https://www.cms.gov/priorities/key-initiatives/hospital-price-transparency"
                 >
                   About Hospital Price Transparency
                 </a>,
